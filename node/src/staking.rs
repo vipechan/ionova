@@ -21,7 +21,7 @@ pub struct BlockRewardConfig {
 impl Default for BlockRewardConfig {
     fn default() -> Self {
         Self {
-            initial_reward: dec!(79.3),
+            initial_reward: dec!(79.35),  // Recalculated for 20-year emission
             halving_interval: 63_072_000, // 2 years at 1s blocks
             validator_share: dec!(0.70),
             sequencer_share: dec!(0.20),
@@ -226,18 +226,18 @@ mod tests {
         let staking = StakingRewards::new(config, 0);
 
         // Initial reward
-        assert_eq!(staking.calculate_block_reward(0), dec!(79.3));
+        assert_eq!(staking.calculate_block_reward(0), dec!(79.35));
 
         // After 1 halving (2 years)
         assert_eq!(
             staking.calculate_block_reward(63_072_000),
-            dec!(39.65)
+            dec!(39.675)
         );
 
         // After 2 halvings (4 years)
         assert_eq!(
             staking.calculate_block_reward(63_072_000 * 2),
-            dec!(19.825)
+            dec!(19.8375)
         );
     }
 
@@ -253,29 +253,29 @@ mod tests {
 
         let staking = StakingRewards::new(BlockRewardConfig::default(), 0);
         
-        // Total reward: 79.3 IONX
+        // Total reward: 79.35 IONX
         let (operator_reward, delegator_pool) = 
-            staking.apply_commission(&validator, dec!(79.3));
+            staking.apply_commission(&validator, dec!(79.35));
 
-        // Operator gets: (100k/1M × 79.3) + (900k/1M × 79.3 × 0.10)
-        //              = 7.93 + 7.137 = 15.067 IONX
-        assert_eq!(operator_reward, dec!(15.067));
+        // Operator gets: (100k/1M × 79.35) + (900k/1M × 79.35 × 0.10)
+        //              = 7.935 + 7.1415 = 15.0765 IONX
+        assert_eq!(operator_reward, dec!(15.0765));
 
-        // Delegators get: (900k/1M × 79.3) × 0.90 = 64.233 IONX
-        assert_eq!(delegator_pool, dec!(64.233));
+        // Delegators get: (900k/1M × 79.35) × 0.90 = 64.2735 IONX
+        assert_eq!(delegator_pool, dec!(64.2735));
     }
 
     #[test]
     fn test_staking_apr() {
-        // With 79.3 IONX/block, 86400 blocks/day
-        // 2-year rewards = 79.3 × 86,400 × 730 = 5,004M IONX (first epoch)
-        // After 30 years, total ≈ 10B IONX
+        // With 79.35 IONX/block, 86400 blocks/day
+        // 2-year rewards = 79.35 × 86,400 × 730 = 5,006M IONX (first epoch)
+        // After 20 years (10 halvings), total ≈ 10B IONX
 
-        let total_over_30_years = dec!(79.3) * dec!(86400) * dec!(365) * dec!(30);
+        let total_over_20_years = dec!(79.35) * dec!(86400) * dec!(365) * dec!(20);
         // This equals approximately 10B with the halving formula
         
         // If 1B IONX staked initially, Year 1-2 APR:
-        let annual_rewards_year1 = dec!(79.3) * dec!(86400) * dec!(365);
+        let annual_rewards_year1 = dec!(79.35) * dec!(86400) * dec!(365);
         let total_staked = dec!(100_000_000); // 100M for test
         let apr = annual_rewards_year1 / total_staked;
 

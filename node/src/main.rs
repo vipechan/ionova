@@ -4,6 +4,8 @@ mod sequencer;
 mod metrics;
 mod evm_executor;
 mod genesis;
+mod emission;
+mod staking;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
