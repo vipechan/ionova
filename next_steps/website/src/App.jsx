@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import ValidatorSale from './pages/ValidatorSale';
+import NetworkSwitcher from './components/NetworkSwitcher';
 import './App.css';
 import './styles/ValidatorSale.css';
 
@@ -20,6 +21,7 @@ function App() {
             <h1>⚡ Ionova</h1>
           </div>
           <div className="wallet-section">
+            {isConnected && <NetworkSwitcher />}
             {isConnected ? (
               <div className="connected">
                 <span className="address">
