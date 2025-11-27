@@ -1,0 +1,43 @@
+# Code Owners
+# This file defines individuals or teams responsible for code in this repository.
+# When a PR modifies files, the defined owners are automatically requested for review.
+
+# Default owners for everything in the repo
+* @vipechan
+
+# Rust Node Implementation
+/node/ @vipechan
+/node/src/consensus/ @vipechan
+/node/src/evm_executor.rs @vipechan
+/node/src/genesis.rs @vipechan
+
+# Smart Contracts
+/contracts/ @vipechan
+/contracts/contracts/dex/ @vipechan
+/contracts/contracts/lending/ @vipechan
+/contracts/contracts/staking/ @vipechan
+/contracts/contracts/governance/ @vipechan
+
+# SDK
+/sdk/ @vipechan
+
+# Frontend
+/next_steps/website/ @vipechan
+
+# DevNet Configuration
+/devnet/ @vipechan
+/devnet/docker-compose.yml @vipechan
+/devnet/genesis.json @vipechan
+
+# Documentation
+/requirements/ @vipechan
+*.md @vipechan
+
+# CI/CD and GitHub Configuration
+/.github/ @vipechan
+/.github/workflows/ @vipechan
+
+# Security-sensitive files
+/SECURITY.md @vipechan
+/contracts/contracts/governance/ @vipechan
+/node/src/consensus/ @vipechan

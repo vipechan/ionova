@@ -7,6 +7,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)](https://www.rust-lang.org)
 [![Solidity](https://img.shields.io/badge/Solidity-0.8+-blue.svg)](https://soliditylang.org)
+[![Contracts CI](https://github.com/vipechan/ionova/actions/workflows/contracts-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/contracts-ci.yml)
+[![Node CI](https://github.com/vipechan/ionova/actions/workflows/node-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/node-ci.yml)
+[![Frontend CI](https://github.com/vipechan/ionova/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/frontend-ci.yml)
+[![Security Audit](https://github.com/vipechan/ionova/actions/workflows/security-audit.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/security-audit.yml)
+
 
 ---
 
@@ -254,6 +259,19 @@ ionova/
 - 💱 **Trade on DEX:** Low fees, instant swaps
 - 💵 **Lend & Borrow:** Earn 2-100% APY
 - 🔒 **Stake IONX:** Earn 791% APY (Year 1)
+
+---
+
+## Security
+
+Ionova takes security seriously. We have implemented multiple layers of security:
+
+- 🔒 **Quantum-Resistant Consensus:** Post-quantum BFT algorithm
+- 🛡️ **Bug Bounty Program:** Up to $50,000 for critical vulnerabilities
+- 🔍 **Regular Audits:** Internal and external security audits
+- 📋 **Security Policy:** See [SECURITY.md](SECURITY.md) for details
+
+**Found a vulnerability?** Please report it responsibly to security@ionova.network
 
 ---
 

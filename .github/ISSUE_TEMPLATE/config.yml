@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💬 Discord Community
+    url: https://discord.gg/ionova
+    about: Join our Discord for general questions and community support
+  - name: 📚 Documentation
+    url: https://github.com/vipechan/ionova/tree/master/requirements
+    about: Check our comprehensive documentation for guides and tutorials
+  - name: 🔒 Security Issues
+    url: mailto:security@ionova.network
+    about: Report security vulnerabilities privately via email
+  - name: 💰 Bug Bounty Program
+    url: https://github.com/vipechan/ionova/blob/master/SECURITY.md
+    about: Learn about our bug bounty program (up to $50,000)
