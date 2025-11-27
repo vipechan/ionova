@@ -1,0 +1,61 @@
+{
+    "chain_id": "ionova-devnet-1",
+    "genesis_time": "2025-11-25T00:00:00Z",
+    "block_time_ms": 1000,
+    "shard_count": 8,
+    "consensus": {
+        "type": "pq-bft",
+        "committee_size": 3,
+        "finality_threshold": 0.67
+    },
+    "fee_model": {
+        "base_tx_fee": "0.0001",
+        "base_fee_per_gas_start": "0.000001",
+        "gas_price_adjustment_factor": 0.125,
+        "target_gas_utilization": 0.8
+    },
+    "fee_split": {
+        "validators": 0.6,
+        "treasury": 0.2,
+        "burn": 0.2
+    },
+    "per_shard": {
+        "target_tps": 5000,
+        "gas_per_tx_avg": 5000,
+        "max_gas_per_block": 25000000,
+        "target_gas_per_block": 20000000,
+        "sequencer": {
+            "micro_block_interval_ms": 200,
+            "batch_interval_ms": 1000,
+            "tip_min": "0.0"
+        }
+    },
+    "treasury_address": "ionova1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq000000",
+    "initial_validators": [
+        {
+            "address": "ionova1validator1qqqqqqqqqqqqqqqqqqqqqqqqqq",
+            "pubkey": "02c6047f9441ed7d6d3045406e95c07cd85c778e4b8cef3ca7abac09b95c709ee5",
+            "power": 100,
+            "name": "validator-0"
+        },
+        {
+            "address": "ionova1validator2qqqqqqqqqqqqqqqqqqqqqqqqqq",
+            "pubkey": "03df7940ee7cddd2f97763f67e1fb13488da3fbdd7f9c68ec5ef0864c8d4d8e0d6",
+            "power": 100,
+            "name": "validator-1"
+        },
+        {
+            "address": "ionova1validator3qqqqqqqqqqqqqqqqqqqqqqqqqq",
+            "pubkey": "0258fc5bfe8f8e6e92c8f04924c7b5d3f1b7cfb96f2e15e1e24072f2e3d2d5e7f8",
+            "power": 100,
+            "name": "validator-2"
+        }
+    ],
+    "initial_supply": "1000000000",
+    "network": {
+        "p2p_port": 26656,
+        "rpc_port": 26657,
+        "max_peers": 50,
+        "peer_exchange": true
+    }
+}

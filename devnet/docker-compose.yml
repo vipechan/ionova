@@ -1,0 +1,209 @@
+services:
+  # Base layer validators
+  validator-0:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.validator
+    container_name: ionova-validator-0
+    command: validator --id 0
+    ports:
+      - "26656:26656"
+      - "26657:26657"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  validator-1:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.validator
+    container_name: ionova-validator-1
+    command: validator --id 1
+    ports:
+      - "26666:26656"
+      - "26667:26657"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  validator-2:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.validator
+    container_name: ionova-validator-2
+    command: validator --id 2
+    ports:
+      - "26676:26656"
+      - "26677:26657"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  # Shard sequencers
+  sequencer-0:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-0
+    command: sequencer --shard-id 0 --metrics-port 9100
+    ports:
+      - "27000:27000"
+      - "9100:9100"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-1:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-1
+    command: sequencer --shard-id 1 --metrics-port 9101
+    ports:
+      - "27100:27100"
+      - "9101:9101"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-2:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-2
+    command: sequencer --shard-id 2 --metrics-port 9102
+    ports:
+      - "27200:27200"
+      - "9102:9102"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-3:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-3
+    command: sequencer --shard-id 3 --metrics-port 9103
+    ports:
+      - "27300:27300"
+      - "9103:9103"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-4:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-4
+    command: sequencer --shard-id 4 --metrics-port 9104
+    ports:
+      - "27400:27400"
+      - "9104:9104"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-5:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-5
+    command: sequencer --shard-id 5 --metrics-port 9105
+    ports:
+      - "27500:27500"
+      - "9105:9105"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-6:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-6
+    command: sequencer --shard-id 6 --metrics-port 9106
+    ports:
+      - "27600:27600"
+      - "9106:9106"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  sequencer-7:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-sequencer-7
+    command: sequencer --shard-id 7 --metrics-port 9107
+    ports:
+      - "27700:27700"
+      - "9107:9107"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - ./shard_config.json:/config/shard_config.json:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  # Monitoring
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ionova-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks:
+      - ionova-net
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ionova-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - ionova-net
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+networks:
+  ionova-net:
+    driver: bridge
+
+volumes:
+  grafana-storage:

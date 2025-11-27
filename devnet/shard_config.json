@@ -1,0 +1,92 @@
+{
+    "shards": [
+        {
+            "shard_id": 0,
+            "name": "shard-0",
+            "sequencer": {
+                "address": "ionova1seq0qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27000,
+                "p2p_port": 27001,
+                "metrics_port": 9100
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 1,
+            "name": "shard-1",
+            "sequencer": {
+                "address": "ionova1seq1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27100,
+                "p2p_port": 27101,
+                "metrics_port": 9101
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 2,
+            "name": "shard-2",
+            "sequencer": {
+                "address": "ionova1seq2qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27200,
+                "p2p_port": 27201,
+                "metrics_port": 9102
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 3,
+            "name": "shard-3",
+            "sequencer": {
+                "address": "ionova1seq3qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27300,
+                "p2p_port": 27301,
+                "metrics_port": 9103
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 4,
+            "name": "shard-4",
+            "sequencer": {
+                "address": "ionova1seq4qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27400,
+                "p2p_port": 27401,
+                "metrics_port": 9104
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 5,
+            "name": "shard-5",
+            "sequencer": {
+                "address": "ionova1seq5qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27500,
+                "p2p_port": 27501,
+                "metrics_port": 9105
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 6,
+            "name": "shard-6",
+            "sequencer": {
+                "address": "ionova1seq6qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27600,
+                "p2p_port": 27601,
+                "metrics_port": 9106
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+            "shard_id": 7,
+            "name": "shard-7",
+            "sequencer": {
+                "address": "ionova1seq7qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+                "rpc_port": 27700,
+                "p2p_port": 27701,
+                "metrics_port": 9107
+            },
+            "state_root": "0x0000000000000000000000000000000000000000000000000000000000000000"
+        }
+    ]
+}

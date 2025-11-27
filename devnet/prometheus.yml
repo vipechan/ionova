@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'ionova-shards'
+    static_configs:
+      - targets:
+          - 'sequencer-0:9100'
+          - 'sequencer-1:9101'
+          - 'sequencer-2:9102'
+          - 'sequencer-3:9103'
+          - 'sequencer-4:9104'
+          - 'sequencer-5:9105'
+          - 'sequencer-6:9106'
+          - 'sequencer-7:9107'
