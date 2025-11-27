@@ -7,8 +7,8 @@
 - **Total fractions**: 1,800,000
 - **Fractions per validator**: 100,000
 - **Starting price**: $10/fraction
-- **Ending price**: $50/fraction (bonding curve)
-- **Total raise**: ~$54,000,000
+- **Ending price**: $100/fraction (bonding curve)
+- **Total raise**: ~$99,000,000
 
 ---
 
@@ -16,7 +16,7 @@
 
 **Formula:**
 ```
-price(N) = $10 + (N / 1,800,000) × $40
+price(N) = $10 + (N / 1,800,000) × $90
 
 where N = fraction number (1 to 1,800,000)
 ```
@@ -26,10 +26,10 @@ where N = fraction number (1 to 1,800,000)
 | Fraction # | Price | Notes |
 |------------|-------|-------|
 | 1 | $10.00 | First fraction |
-| 100,000 | $12.22 | End of Validator 1 |
-| 500,000 | $21.11 | ~28% sold |
-| 900,000 | $30.00 | 50% sold |
-| 1,800,000 | $50.00 | Last fraction |
+| 100,000 | $15.00 | End of Validator 1 |
+| 500,000 | $35.00 | ~28% sold |
+| 900,000 | $55.00 | 50% sold |
+| 1,800,000 | $100.00 | Last fraction |
 
 ---
 
@@ -102,16 +102,16 @@ Revenue per fraction: $97M / 100,000 = $970/year
 ## Total Raise Calculation
 
 ```
-Total cost = Σ(i=1 to 1,800,000) [10 + (i/1,800,000) × 40]
-           = 1,800,000 × 10 + (40/2) × 1,800,000
-           = 18,000,000 + 36,000,000
-           = $54,000,000
+Total cost = Σ(i=1 to 1,800,000) [10 + (i/1,800,000) × 90]
+           = 1,800,000 × 10 + (90/2) × 1,800,000
+           = 18,000,000 + 81,000,000
+           = $99,000,000
 ```
 
 **Breakdown:**
-- Early phase (1-600k): ~$15M
-- Mid phase (600k-1.2M): ~$18M  
-- Late phase (1.2M-1.8M): ~$21M
+- Early phase (1-600k): ~$21M
+- Mid phase (600k-1.2M): ~$33M  
+- Late phase (1.2M-1.8M): ~$45M
 
 ---
 
