@@ -6,6 +6,8 @@ mod evm_executor;
 mod genesis;
 mod emission;
 mod staking;
+mod security;
+mod network_security;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
