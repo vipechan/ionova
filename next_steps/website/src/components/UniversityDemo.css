@@ -1,0 +1,497 @@
+.demo-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    background: #f8f9fa;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    min-height: 800px;
+}
+
+/* Notifications */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.3s ease-out;
+}
+
+.notification.success {
+    background: #10b981;
+}
+
+.notification.error {
+    background: #ef4444;
+}
+
+.notification.info {
+    background: #3b82f6;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Header */
+.demo-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 2.5rem;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #111827;
+}
+
+.badge {
+    background: #f3f4f6;
+    color: #6b7280;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.connect-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.connect-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.wallet-info {
+    display: flex;
+    gap: 12px;
+}
+
+.balance-pill,
+.streak-pill,
+.address-pill {
+    background: #f3f4f6;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.balance-pill {
+    background: #eff6ff;
+    color: #1e40af;
+    border: 1px solid #dbeafe;
+}
+
+.streak-pill {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fee2e2;
+}
+
+/* Navigation */
+.demo-nav {
+    background: white;
+    padding: 0 2rem;
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.demo-nav button {
+    background: none;
+    border: none;
+    padding: 1rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.demo-nav button.active {
+    color: #2563eb;
+}
+
+.demo-nav button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #2563eb;
+}
+
+.count {
+    background: #ef4444;
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+/* Content */
+.demo-content {
+    padding: 2rem;
+}
+
+/* Catalog Grid */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.course-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.course-icon {
+    font-size: 2.5rem;
+    background: #f3f4f6;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.level-tag {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.level-tag.beginner {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.level-tag.intermediate {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.level-tag.advanced {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.level-tag.expert {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.course-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #111827;
+}
+
+.course-card p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.course-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    background: #f9fafb;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.metric .label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.metric .val {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #111827;
+}
+
+.metric .val.highlight {
+    color: #059669;
+}
+
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn.primary {
+    background: #2563eb;
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background: #1d4ed8;
+}
+
+.action-btn.secondary {
+    background: #f3f4f6;
+    color: #6b7280;
+    cursor: default;
+}
+
+.action-btn.success {
+    background: #10b981;
+    color: white;
+    cursor: default;
+}
+
+/* Learning Dashboard */
+.active-courses {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.learning-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.learning-card.completed {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.learning-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+}
+
+.mini-icon {
+    font-size: 2rem;
+}
+
+.learning-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.progress-container {
+    flex: 2;
+    background: #e5e7eb;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #2563eb;
+    transition: width 0.5s ease-out;
+}
+
+.learning-card.completed .progress-bar {
+    background: #10b981;
+}
+
+.learning-actions {
+    flex: 1;
+}
+
+/* Certificates */
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.nft-cert-card {
+    background: white;
+    padding: 1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.cert-border {
+    border: 8px double #e5e7eb;
+    padding: 2rem;
+    text-align: center;
+    background: #fff;
+    position: relative;
+}
+
+.cert-logo {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cert-title {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.5rem;
+    color: #111827;
+    margin-bottom: 0.5rem;
+}
+
+.cert-course {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 1.5rem;
+}
+
+.cert-details {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    color: #6b7280;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.cert-id {
+    font-family: monospace;
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.cert-actions {
+    margin-top: 1rem;
+}
+
+.verify-btn {
+    width: 100%;
+    padding: 10px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 8px;
+    color: #4b5563;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.verify-btn:hover {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem;
+    color: #6b7280;
+}
+
+.empty-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state button {
+    margin-top: 1.5rem;
+    padding: 10px 20px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
