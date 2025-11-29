@@ -1,5 +1,4 @@
 use anyhow::Result;
-use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::convert::Infallible;
@@ -50,7 +49,7 @@ pub async fn start_rpc_server(
     warp::serve(rpc_route).run(([0, 0, 0, 0], port)).await;
 }
 
-fn with_state<T: Clone + Send>(
+fn with_state<T: Clone + Send + Sync>(
     state: Arc<T>,
 ) -> impl Filter<Extract = (Arc<T>,), Error = Infallible> + Clone {
     warp::any().map(move || state.clone())
@@ -81,10 +80,11 @@ async fn handle_request(
                 // Actually, let's try to parse the JSON directly if it's an object
                 let tx_result = if let Some(tx_obj) = req.params.get(0).and_then(|v| v.as_object()) {
                     serde_json::from_value::<Transaction>(serde_json::Value::Object(tx_obj.clone()))
+                        .map_err(|e| e.to_string())
                 } else if let Ok(tx) = serde_json::from_str::<Transaction>(tx_str) {
                     Ok(tx)
                 } else {
-                    Err("Invalid transaction format")
+                    Err("Invalid transaction format".to_string())
                 };
 
                 match tx_result {
