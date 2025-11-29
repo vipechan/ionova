@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createConfig, http, WagmiProvider } from 'wagmi';
 import { mainnet, sepolia, polygon } from 'wagmi/chains';
+import { injected, walletConnect, coinbaseWallet } from 'wagmi/connectors';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
@@ -26,6 +27,11 @@ const ionovaDevnet = {
 // Create wagmi config (Wagmi v2)
 const config = createConfig({
   chains: [mainnet, sepolia, polygon, ionovaDevnet],
+  connectors: [
+    injected(),
+    walletConnect({ projectId: 'YOUR_PROJECT_ID' }),
+    coinbaseWallet({ appName: 'Ionova' }),
+  ],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),

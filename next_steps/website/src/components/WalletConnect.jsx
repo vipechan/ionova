@@ -1,8 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useConnect, useDisconnect, useAccount } from 'wagmi';
-import { InjectedConnector } from 'wagmi/connectors/injected';
-import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
-import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import './WalletConnect.css';
 
 /**
@@ -13,45 +10,15 @@ function WalletConnect({ onConnect }) {
     const [showModal, setShowModal] = useState(false);
     const { address, isConnected } = useAccount();
     const { disconnect } = useDisconnect();
-    const { connect, connectors, error, isLoading, pendingConnector } = useConnect({
-        onSuccess: () => {
+    const { connect, connectors, error, isPending } = useConnect();
+
+    // Handle connection success
+    useEffect(() => {
+        if (isConnected && showModal) {
             setShowModal(false);
             if (onConnect) onConnect();
-        },
-    });
-
-    const walletOptions = [
-        {
-            id: 'metamask',
-            name: 'MetaMask',
-            icon: '🦊',
-            description: 'Connect with MetaMask browser extension',
-            connector: new InjectedConnector(),
-        },
-        {
-            id: 'walletconnect',
-            name: 'WalletConnect',
-            icon: '📱',
-            description: 'Scan QR code with your mobile wallet',
-            connector: new WalletConnectConnector({
-                options: {
-                    projectId: 'YOUR_PROJECT_ID', // Replace with actual WalletConnect project ID
-                    showQrModal: true,
-                },
-            }),
-        },
-        {
-            id: 'coinbase',
-            name: 'Coinbase Wallet',
-            icon: '🔵',
-            description: 'Connect with Coinbase Wallet',
-            connector: new CoinbaseWalletConnector({
-                options: {
-                    appName: 'Ionova',
-                },
-            }),
-        },
-    ];
+        }
+    }, [isConnected, showModal, onConnect]);
 
     const handleConnect = (connector) => {
         connect({ connector });
@@ -60,6 +27,15 @@ function WalletConnect({ onConnect }) {
     const handleDisconnect = () => {
         disconnect();
         setShowModal(false);
+    };
+
+    // Helper to get icon for connector
+    const getConnectorIcon = (connector) => {
+        if (connector.name.toLowerCase().includes('metamask')) return '🦊';
+        if (connector.name.toLowerCase().includes('walletconnect')) return '📱';
+        if (connector.name.toLowerCase().includes('coinbase')) return '🔵';
+        if (connector.name.toLowerCase().includes('injected')) return '💉';
+        return '🔌';
     };
 
     if (isConnected) {
@@ -100,19 +76,19 @@ function WalletConnect({ onConnect }) {
                             </p>
 
                             <div className="wallet-options">
-                                {walletOptions.map((wallet) => (
+                                {connectors.map((connector) => (
                                     <button
-                                        key={wallet.id}
-                                        onClick={() => handleConnect(wallet.connector)}
+                                        key={connector.uid}
+                                        onClick={() => handleConnect(connector)}
                                         className="wallet-option"
-                                        disabled={isLoading && pendingConnector?.id === wallet.connector.id}
+                                        disabled={isPending}
                                     >
-                                        <div className="wallet-icon">{wallet.icon}</div>
+                                        <div className="wallet-icon">{getConnectorIcon(connector)}</div>
                                         <div className="wallet-info">
-                                            <div className="wallet-name">{wallet.name}</div>
-                                            <div className="wallet-description">{wallet.description}</div>
+                                            <div className="wallet-name">{connector.name}</div>
+                                            <div className="wallet-description">Connect with {connector.name}</div>
                                         </div>
-                                        {isLoading && pendingConnector?.id === wallet.connector.id && (
+                                        {isPending && (
                                             <div className="wallet-loading">
                                                 <div className="spinner"></div>
                                             </div>
