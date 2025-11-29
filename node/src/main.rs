@@ -8,6 +8,7 @@ mod emission;
 mod staking;
 mod security;
 mod network_security;
+mod rpc;
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
@@ -45,6 +46,10 @@ enum Commands {
         /// Metrics port
         #[arg(short, long, default_value_t = 9100)]
         metrics_port: u16,
+
+        /// RPC port
+        #[arg(short, long, default_value_t = 27000)]
+        rpc_port: u16,
     },
 }
 
@@ -58,8 +63,8 @@ async fn main() -> Result<()> {
         Commands::Validator { id } => {
             run_validator(id).await?;
         }
-        Commands::Sequencer { shard_id, metrics_port } => {
-            run_sequencer(shard_id, metrics_port).await?;
+        Commands::Sequencer { shard_id, metrics_port, rpc_port } => {
+            run_sequencer(shard_id, metrics_port, rpc_port).await?;
         }
     }
 
@@ -79,7 +84,7 @@ async fn run_validator(id: u8) -> Result<()> {
     Ok(())
 }
 
-async fn run_sequencer(shard_id: u8, metrics_port: u16) -> Result<()> {
+async fn run_sequencer(shard_id: u8, metrics_port: u16, rpc_port: u16) -> Result<()> {
     info!("Starting Ionova Sequencer for shard {}", shard_id);
 
     // Initialize metrics
@@ -91,6 +96,12 @@ async fn run_sequencer(shard_id: u8, metrics_port: u16) -> Result<()> {
 
     // Create transaction queue
     let (tx_sender, tx_receiver) = mpsc::channel::<Transaction>(10000);
+
+    // Start RPC server
+    let rpc_sender = tx_sender.clone();
+    tokio::spawn(async move {
+        rpc::start_rpc_server(rpc_port, shard_id, rpc_sender).await;
+    });
 
     // Configure sequencer
     let config = SequencerConfig {
@@ -112,9 +123,9 @@ async fn run_sequencer(shard_id: u8, metrics_port: u16) -> Result<()> {
     
     info!("Sequencer for shard {} started successfully", shard_id);
     info!("Metrics available at http://localhost:{}/metrics", metrics_port);
+    info!("RPC server available at http://localhost:{}", rpc_port);
     
-    // In production, would also start RPC server to receive transactions
-    // For now, run the sequencer loop
+    // Run the sequencer loop
     sequencer.run().await?;
 
     Ok(())
