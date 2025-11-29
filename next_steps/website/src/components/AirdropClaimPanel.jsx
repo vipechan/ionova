@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { formatEther, parseEther } from 'viem';
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
@@ -68,39 +68,48 @@ export default function AirdropClaimPanel() {
     const [userAllocation, setUserAllocation] = useState(0);
 
     // Get active airdrops
-    const { data: activeAirdrops } = useContractRead({
+    const { data: activeAirdrops } = useReadContract({
         address: AIRDROP_ADDRESS,
         abi: AIRDROP_ABI,
         functionName: 'getActiveAirdrops',
     });
 
     // Get selected airdrop details
-    const { data: airdropDetails } = useContractRead({
+    const { data: airdropDetails } = useReadContract({
         address: AIRDROP_ADDRESS,
         abi: AIRDROP_ABI,
         functionName: 'getAirdrop',
         args: [selectedAirdrop],
-        enabled: selectedAirdrop !== null,
+        query: {
+            enabled: selectedAirdrop !== null,
+        },
     });
 
     // Get user claim status
-    const { data: claimStatus } = useContractRead({
+    const { data: claimStatus } = useReadContract({
         address: AIRDROP_ADDRESS,
         abi: AIRDROP_ABI,
         functionName: 'getUserClaimStatus',
         args: [selectedAirdrop, address],
-        enabled: selectedAirdrop !== null && !!address,
+        query: {
+            enabled: selectedAirdrop !== null && !!address,
+        },
     });
 
     // Claim tokens
-    const { write: claimTokens, data: claimTxData } = useContractWrite({
-        address: AIRDROP_ADDRESS,
-        abi: AIRDROP_ABI,
-        functionName: 'claim',
-    });
+    const { writeContract: claimTokensWrite, data: claimTxHash, isPending: isClaiming } = useWriteContract();
 
-    const { isLoading: isClaiming, isSuccess: claimSuccess } = useWaitForTransaction({
-        hash: claimTxData?.hash,
+    const claimTokens = ({ args }) => {
+        claimTokensWrite({
+            address: AIRDROP_ADDRESS,
+            abi: AIRDROP_ABI,
+            functionName: 'claim',
+            args
+        });
+    };
+
+    const { isSuccess: claimSuccess } = useWaitForTransactionReceipt({
+        hash: claimTxHash,
     });
 
     // Load merkle proof for user
@@ -240,19 +249,21 @@ export default function AirdropClaimPanel() {
 
 // Airdrop Card Component
 function AirdropCard({ airdropId, isSelected, onClick, userAddress }) {
-    const { data: details } = useContractRead({
+    const { data: details } = useReadContract({
         address: AIRDROP_ADDRESS,
         abi: AIRDROP_ABI,
         functionName: 'getAirdrop',
         args: [airdropId],
     });
 
-    const { data: userStatus } = useContractRead({
+    const { data: userStatus } = useReadContract({
         address: AIRDROP_ADDRESS,
         abi: AIRDROP_ABI,
         functionName: 'getUserClaimStatus',
         args: [airdropId, userAddress],
-        enabled: !!userAddress,
+        query: {
+            enabled: !!userAddress,
+        },
     });
 
     if (!details) return null;

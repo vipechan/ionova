@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import { useContractWrite, useContractRead, useWaitForTransaction } from 'wagmi';
+import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { parseEther, formatEther } from 'viem';
 import { MerkleTree } from 'merkletreejs';
 import keccak256 from 'keccak256';
-
-const AIRDROP_ABI = [
-    // ... (same as claim panel)
-];
+import { ethers } from 'ethers';
 
 const AIRDROP_ADDRESS = import.meta.env.VITE_AIRDROP_ADDRESS;
 
@@ -27,29 +24,34 @@ export default function AirdropAdminPanel() {
     const [merkleTree, setMerkleTree] = useState(null);
 
     // Create airdrop
-    const { write: createAirdrop, data: createTxData } = useContractWrite({
-        address: AIRDROP_ADDRESS,
-        abi: [{
-            "inputs": [
-                { "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" },
-                { "internalType": "address", "name": "_tokenAddress", "type": "address" },
-                { "internalType": "uint256", "name": "_totalAmount", "type": "uint256" },
-                { "internalType": "uint256", "name": "_startTime", "type": "uint256" },
-                { "internalType": "uint256", "name": "_endTime", "type": "uint256" },
-                { "internalType": "uint256", "name": "_vestingDuration", "type": "uint256" },
-                { "internalType": "uint256", "name": "_cliffPeriod", "type": "uint256" },
-                { "internalType": "string", "name": "_name", "type": "string" }
-            ],
-            "name": "createAirdrop",
-            "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-            "stateMutability": "nonpayable",
-            "type": "function"
-        }],
-        functionName": 'createAirdrop',
-  });
+    const { writeContract: createAirdropWrite, data: createTxHash, isPending: isCreating } = useWriteContract();
 
-    const { isLoading: isCreating, isSuccess: createSuccess } = useWaitForTransaction({
-        hash: createTxData?.hash,
+    const createAirdrop = ({ args }) => {
+        createAirdropWrite({
+            address: AIRDROP_ADDRESS,
+            abi: [{
+                "inputs": [
+                    { "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" },
+                    { "internalType": "address", "name": "_tokenAddress", "type": "address" },
+                    { "internalType": "uint256", "name": "_totalAmount", "type": "uint256" },
+                    { "internalType": "uint256", "name": "_startTime", "type": "uint256" },
+                    { "internalType": "uint256", "name": "_endTime", "type": "uint256" },
+                    { "internalType": "uint256", "name": "_vestingDuration", "type": "uint256" },
+                    { "internalType": "uint256", "name": "_cliffPeriod", "type": "uint256" },
+                    { "internalType": "string", "name": "_name", "type": "string" }
+                ],
+                "name": "createAirdrop",
+                "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }],
+            functionName: 'createAirdrop',
+            args
+        });
+    };
+
+    const { isSuccess: createSuccess } = useWaitForTransactionReceipt({
+        hash: createTxHash,
     });
 
     // Handle CSV file upload
