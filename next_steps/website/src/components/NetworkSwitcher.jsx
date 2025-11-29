@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSwitchNetwork, useNetwork } from 'wagmi';
+import { useAccount, useSwitchChain } from 'wagmi';
 import { SUPPORTED_CHAINS, PREFERRED_CHAINS, isChainSupported } from '../config/chains';
 import './NetworkSwitcher.css';
 
@@ -9,16 +9,17 @@ import './NetworkSwitcher.css';
  */
 function NetworkSwitcher() {
     const [showDropdown, setShowDropdown] = useState(false);
-    const { chain } = useNetwork();
-    const { chains, error, isLoading, pendingChainId, switchNetwork } = useSwitchNetwork();
+    const { chain } = useAccount();
+    const { chains, switchChain, error, isPending, variables } = useSwitchChain();
+    const pendingChainId = variables?.chainId;
 
     const currentChain = chain ? SUPPORTED_CHAINS[Object.keys(SUPPORTED_CHAINS).find(
         key => SUPPORTED_CHAINS[key].id === chain.id
     )] : null;
 
     const handleSwitchNetwork = async (chainId) => {
-        if (switchNetwork) {
-            switchNetwork(chainId);
+        if (switchChain) {
+            switchChain({ chainId });
             setShowDropdown(false);
         }
     };
@@ -74,7 +75,7 @@ function NetworkSwitcher() {
                         <div className="network-list">
                             {PREFERRED_CHAINS.map((chainConfig) => {
                                 const isActive = chain?.id === chainConfig.id;
-                                const isPending = pendingChainId === chainConfig.id;
+                                const isPendingChain = pendingChainId === chainConfig.id;
                                 const isAvailable = chains?.some(c => c.id === chainConfig.id);
 
                                 return (
@@ -88,7 +89,7 @@ function NetworkSwitcher() {
                                             }
                                         }}
                                         className={`network-option ${isActive ? 'active' : ''}`}
-                                        disabled={isPending || isLoading}
+                                        disabled={isPending || (isPendingChain && isPending)}
                                     >
                                         <div className="network-info">
                                             <span className="network-icon-large">{chainConfig.icon}</span>
@@ -100,7 +101,7 @@ function NetworkSwitcher() {
                                             </div>
                                         </div>
                                         {isActive && <span className="active-badge">✓ Active</span>}
-                                        {isPending && <div className="spinner-small"></div>}
+                                        {isPendingChain && isPending && <div className="spinner-small"></div>}
                                         {!isAvailable && !isActive && (
                                             <span className="add-badge">+ Add</span>
                                         )}
@@ -112,7 +113,7 @@ function NetworkSwitcher() {
                         {error && (
                             <div className="error-message">
                                 <span className="error-icon">⚠️</span>
-                                <span>Failed to switch network</span>
+                                <span>{error.message || 'Failed to switch network'}</span>
                             </div>
                         )}
 
