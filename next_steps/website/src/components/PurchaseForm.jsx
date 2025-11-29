@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useValidatorSale } from '../hooks/useValidatorSale';
-import { useContractWrite, useContractRead, useAccount } from 'wagmi';
+import { useWriteContract, useReadContract, useAccount } from 'wagmi';
 import { formatUnits } from 'viem';
 import { useSearchParams } from 'react-router-dom';
 
@@ -53,20 +53,18 @@ export default function PurchaseForm() {
     const currentTokenAddress = selectedToken === 'USDC' ? USDC_ADDRESS : USDT_ADDRESS;
 
     // Read token allowance
-    const { data: allowance } = useContractRead({
+    const { data: allowance } = useReadContract({
         address: currentTokenAddress,
         abi: TOKEN_ABI,
         functionName: 'allowance',
         args: [userAddress, contractAddress],
-        enabled: !!userAddress,
+        query: {
+            enabled: !!userAddress,
+        },
     });
 
     // Approve token
-    const { write: approveToken, isLoading: isApproving } = useContractWrite({
-        address: currentTokenAddress,
-        abi: TOKEN_ABI,
-        functionName: 'approve',
-    });
+    const { writeContract: approveTokenWrite, isPending: isApproving } = useWriteContract();
 
     // Calculate cost when quantity changes
     const handleQuantityChange = async (newQuantity) => {
@@ -80,7 +78,10 @@ export default function PurchaseForm() {
     // Handle approve
     const handleApprove = async () => {
         if (!cost) return;
-        approveToken({
+        approveTokenWrite({
+            address: currentTokenAddress,
+            abi: TOKEN_ABI,
+            functionName: 'approve',
             args: [contractAddress, cost],
         });
     };
@@ -98,7 +99,7 @@ export default function PurchaseForm() {
     };
 
     // Check if need approval
-    const needsApproval = cost && allowance && allowance < cost;
+    const needsApproval = cost && allowance !== undefined && allowance < cost;
 
     // Calculate metrics
     const totalCostUSD = cost ? parseFloat(formatUnits(cost, 6)) : 0;

@@ -1,4 +1,4 @@
-import { useContractRead, useContractWrite, useWaitForTransaction, useAccount } from 'wagmi';
+import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
 import { formatUnits } from 'viem';
 import validatorFractionNFTAbi from '../contracts/ValidatorFractionNFT.json';
 
@@ -8,48 +8,55 @@ export function useAffiliate() {
     const { address } = useAccount();
 
     // Read: Affiliate Stats
-    const { data: affiliateStats, refetch: refetchStats } = useContractRead({
+    const { data: affiliateStats, refetch: refetchStats } = useReadContract({
         address: CONTRACT_ADDRESS,
         abi: validatorFractionNFTAbi,
         functionName: 'getAffiliateStats',
         args: [address],
-        enabled: !!address,
-        watch: true,
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Read: Next Rank Requirements
-    const { data: nextRankData } = useContractRead({
+    const { data: nextRankData } = useReadContract({
         address: CONTRACT_ADDRESS,
         abi: validatorFractionNFTAbi,
         functionName: 'getNextRankRequirements',
         args: [address],
-        enabled: !!address,
-        watch: true,
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Read: My Referrer
-    const { data: myReferrer } = useContractRead({
+    const { data: myReferrer } = useReadContract({
         address: CONTRACT_ADDRESS,
         abi: validatorFractionNFTAbi,
         functionName: 'getMyReferrer',
-        enabled: !!address,
-        watch: true,
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Write: Claim Commission
     const {
         data: claimData,
-        write: claimCommission,
-        isLoading: isClaiming,
-        isError: claimError,
-    } = useContractWrite({
-        address: CONTRACT_ADDRESS,
-        abi: validatorFractionNFTAbi,
-        functionName: 'claimCommission',
-    });
+        writeContract: claimCommissionWrite,
+        isPending: isClaiming,
+        isError: claimError
+    } = useWriteContract();
 
-    const { isLoading: isWaitingForClaim, isSuccess: claimSuccess } = useWaitForTransaction({
-        hash: claimData?.hash,
+    const claimCommission = () => {
+        claimCommissionWrite({
+            address: CONTRACT_ADDRESS,
+            abi: validatorFractionNFTAbi,
+            functionName: 'claimCommission',
+        });
+    };
+
+    const { isLoading: isWaitingForClaim, isSuccess: claimSuccess } = useWaitForTransactionReceipt({
+        hash: claimData,
     });
 
     // Format stats

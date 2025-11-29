@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAccount, useContractRead, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useAccount, useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { formatEther, parseEther } from 'viem';
 
 const FAUCET_ABI = [
@@ -57,39 +57,47 @@ export default function FaucetPage() {
     const [countdown, setCountdown] = useState('');
 
     // Get faucet stats
-    const { data: faucetStats } = useContractRead({
+    const { data: faucetStats } = useReadContract({
         address: FAUCET_ADDRESS,
         abi: FAUCET_ABI,
         functionName: 'getFaucetStats',
     });
 
     // Check if user can request
-    const { data: canRequestData } = useContractRead({
+    const { data: canRequestData } = useReadContract({
         address: FAUCET_ADDRESS,
         abi: FAUCET_ABI,
         functionName: 'canRequest',
         args: [address],
-        enabled: !!address,
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Get user stats
-    const { data: userStats } = useContractRead({
+    const { data: userStats } = useReadContract({
         address: FAUCET_ADDRESS,
         abi: FAUCET_ABI,
         functionName: 'getUserStats',
         args: [address],
-        enabled: !!address,
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Request tokens
-    const { write: requestTokens, data: txData } = useContractWrite({
-        address: FAUCET_ADDRESS,
-        abi: FAUCET_ABI,
-        functionName: 'requestTokens',
-    });
+    const { writeContract: requestTokensWrite, data: txHash, isPending: isRequesting } = useWriteContract();
 
-    const { isLoading: isRequesting, isSuccess } = useWaitForTransaction({
-        hash: txData?.hash,
+    const requestTokens = () => {
+        requestTokensWrite({
+            address: FAUCET_ADDRESS,
+            abi: FAUCET_ABI,
+            functionName: 'requestTokens',
+        });
+    };
+
+    const { isLoading: isWaiting, isSuccess } = useWaitForTransactionReceipt({
+        hash: txHash,
     });
 
     // Countdown timer
@@ -203,10 +211,10 @@ export default function FaucetPage() {
 
                 <button
                     className="btn btn-primary btn-large btn-faucet"
-                    onClick={() => requestTokens?.()}
-                    disabled={!eligible || isRequesting}
+                    onClick={requestTokens}
+                    disabled={!eligible || isRequesting || isWaiting}
                 >
-                    {isRequesting ? (
+                    {isRequesting || isWaiting ? (
                         <>
                             <span className="spinner"></span>
                             Requesting...
