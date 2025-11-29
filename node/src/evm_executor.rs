@@ -52,10 +52,7 @@ impl EvmExecutor {
         let mut env = Env::default();
         
         // Configure chain
-        env.cfg = CfgEnv {
-            chain_id: self.chain_id,
-            ..Default::default()
-        };
+        env.cfg.chain_id = self.chain_id;
 
         // Configure block
         env.block = BlockEnv {

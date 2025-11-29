@@ -174,16 +174,17 @@ impl NetworkSecurity {
 
     /// Record failed connection attempt
     pub fn record_failed_attempt(&mut self, ip: IpAddr) {
-        let peer = self.peers.entry(ip).or_insert_with(|| PeerInfo::new(ip));
-        peer.failed_attempts += 1;
+        let should_ban = {
+            let peer = self.peers.entry(ip).or_insert_with(|| PeerInfo::new(ip));
+            peer.failed_attempts += 1;
+            peer.reputation -= 1;
+            peer.failed_attempts >= self.config.max_failed_attempts
+        };
 
         // Auto-ban after too many failed attempts
-        if peer.failed_attempts >= self.config.max_failed_attempts {
+        if should_ban {
             self.ban_peer(ip, "Too many failed attempts");
         }
-
-        // Decrease reputation
-        peer.reputation -= 1;
     }
 
     /// Record successful connection

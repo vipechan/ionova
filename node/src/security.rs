@@ -342,7 +342,7 @@ impl SecurityValidator {
         
         // Clean rate limiter entries older than 10 seconds
         self.rate_limiter.retain(|_, (_, timestamp)| {
-            now - timestamp < 10
+            now - *timestamp < 10
         });
     }
 }
