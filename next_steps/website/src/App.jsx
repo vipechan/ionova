@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
-import { InjectedConnector } from 'wagmi/connectors/injected';
 import ValidatorSale from './pages/ValidatorSale';
 import NetworkSwitcher from './components/NetworkSwitcher';
 import './App.css';
@@ -8,10 +7,16 @@ import './styles/ValidatorSale.css';
 
 function App() {
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect({
-    connector: new InjectedConnector(),
-  });
+  const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
+
+  const handleConnect = () => {
+    // Prefer injected connector (MetaMask), fallback to first available
+    const connector = connectors.find(c => c.id === 'injected') || connectors[0];
+    if (connector) {
+      connect({ connector });
+    }
+  };
 
   return (
     <div className="App">
@@ -32,7 +37,7 @@ function App() {
                 </button>
               </div>
             ) : (
-              <button onClick={() => connect()} className="btn btn-primary">
+              <button onClick={handleConnect} className="btn btn-primary">
                 Connect Wallet
               </button>
             )}
