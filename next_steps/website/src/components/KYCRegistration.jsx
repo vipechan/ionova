@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAccount, useContractWrite, useContractRead, useWaitForTransaction } from 'wagmi';
+import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import '../styles/KYCAirdrop.css';
 
 const KYC_AIRDROP_ABI = [
@@ -63,32 +63,36 @@ export default function KYCRegistration() {
     const [uploading, setUploading] = useState(false);
 
     // Get user KYC status from contract
-    const { data: userData, refetch: refetchUserData } = useContractRead({
+    const { data: userData, refetch: refetchUserData } = useReadContract({
         address: KYC_AIRDROP_ADDRESS,
         abi: KYC_AIRDROP_ABI,
         functionName: 'getUserData',
         args: [address],
-        enabled: !!address,
-        watch: true
+        query: {
+            enabled: !!address,
+        },
     });
 
     // Get contract statistics
-    const { data: stats } = useContractRead({
+    const { data: stats } = useReadContract({
         address: KYC_AIRDROP_ADDRESS,
         abi: KYC_AIRDROP_ABI,
         functionName: 'getStatistics',
-        watch: true
     });
 
     // Register wallet on-chain
-    const { write: registerWallet, data: registerTxData } = useContractWrite({
-        address: KYC_AIRDROP_ADDRESS,
-        abi: KYC_AIRDROP_ABI,
-        functionName: 'registerWallet'
-    });
+    const { writeContract: registerWalletWrite, data: registerTxHash, isPending: isRegistering } = useWriteContract();
 
-    const { isLoading: isRegistering, isSuccess: registerSuccess } = useWaitForTransaction({
-        hash: registerTxData?.hash
+    const registerWallet = () => {
+        registerWalletWrite({
+            address: KYC_AIRDROP_ADDRESS,
+            abi: KYC_AIRDROP_ABI,
+            functionName: 'registerWallet'
+        });
+    };
+
+    const { isLoading: isWaiting, isSuccess: registerSuccess } = useWaitForTransactionReceipt({
+        hash: registerTxHash
     });
 
     useEffect(() => {
@@ -439,9 +443,9 @@ export default function KYCRegistration() {
                                 <button
                                     className="btn btn-primary btn-submit"
                                     onClick={handleSubmitKYC}
-                                    disabled={!formData.termsAccepted || uploading || isRegistering}
+                                    disabled={!formData.termsAccepted || uploading || isRegistering || isWaiting}
                                 >
-                                    {uploading || isRegistering ? (
+                                    {uploading || isRegistering || isWaiting ? (
                                         <>
                                             <span className="spinner"></span> Submitting...
                                         </>

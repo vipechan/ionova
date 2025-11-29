@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAccount, useContractWrite, useContractRead, useWaitForTransaction } from 'wagmi';
+import { useAccount, useWriteContract, useReadContract, useWaitForTransactionReceipt } from 'wagmi';
 import { formatEther } from 'viem';
 import '../styles/KYCAirdrop.css';
 
@@ -68,44 +68,58 @@ export default function KYCAdminPanel() {
     const [viewMode, setViewMode] = useState('pending'); // pending, approved, rejected
 
     // Get contract statistics
-    const { data: stats, refetch: refetchStats } = useContractRead({
+    const { data: stats, refetch: refetchStats } = useReadContract({
         address: KYC_AIRDROP_ADDRESS,
         abi: KYC_AIRDROP_ABI,
         functionName: 'getStatistics',
-        watch: true
     });
 
     // Approve KYC
-    const { write: approveKYC, data: approveTxData } = useContractWrite({
-        address: KYC_AIRDROP_ADDRESS,
-        abi: KYC_AIRDROP_ABI,
-        functionName: 'approveKYC'
-    });
+    const { writeContract: approveKYCWrite, data: approveTxHash, isPending: isApproving } = useWriteContract();
 
-    const { isLoading: isApproving, isSuccess: approveSuccess } = useWaitForTransaction({
-        hash: approveTxData?.hash
+    const approveKYC = ({ args }) => {
+        approveKYCWrite({
+            address: KYC_AIRDROP_ADDRESS,
+            abi: KYC_AIRDROP_ABI,
+            functionName: 'approveKYC',
+            args
+        });
+    };
+
+    const { isSuccess: approveSuccess } = useWaitForTransactionReceipt({
+        hash: approveTxHash
     });
 
     // Reject KYC
-    const { write: rejectKYC, data: rejectTxData } = useContractWrite({
-        address: KYC_AIRDROP_ADDRESS,
-        abi: KYC_AIRDROP_ABI,
-        functionName: 'rejectKYC'
-    });
+    const { writeContract: rejectKYCWrite, data: rejectTxHash, isPending: isRejecting } = useWriteContract();
 
-    const { isLoading: isRejecting, isSuccess: rejectSuccess } = useWaitForTransaction({
-        hash: rejectTxData?.hash
+    const rejectKYC = ({ args }) => {
+        rejectKYCWrite({
+            address: KYC_AIRDROP_ADDRESS,
+            abi: KYC_AIRDROP_ABI,
+            functionName: 'rejectKYC',
+            args
+        });
+    };
+
+    const { isSuccess: rejectSuccess } = useWaitForTransactionReceipt({
+        hash: rejectTxHash
     });
 
     // Batch approve
-    const { write: batchApprove, data: batchTxData } = useContractWrite({
-        address: KYC_AIRDROP_ADDRESS,
-        abi: KYC_AIRDROP_ABI,
-        functionName: 'batchApproveKYC'
-    });
+    const { writeContract: batchApproveWrite, data: batchTxHash, isPending: isBatchApproving } = useWriteContract();
 
-    const { isLoading: isBatchApproving, isSuccess: batchSuccess } = useWaitForTransaction({
-        hash: batchTxData?.hash
+    const batchApprove = ({ args }) => {
+        batchApproveWrite({
+            address: KYC_AIRDROP_ADDRESS,
+            abi: KYC_AIRDROP_ABI,
+            functionName: 'batchApproveKYC',
+            args
+        });
+    };
+
+    const { isSuccess: batchSuccess } = useWaitForTransactionReceipt({
+        hash: batchTxHash
     });
 
     // Fetch pending applications from backend
