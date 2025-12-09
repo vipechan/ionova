@@ -291,6 +291,171 @@ Total: ~1M IONX/year from slashing
 
 ---
 
+## ⚠️ Potential Risks & Mitigations
+
+### Risk 1: TVL Never Grows
+
+**Scenario:** If TVL stays at $100M forever
+
+**Impact:**
+- Protocol burns: Only 20M IONX/year (not 250M projected)
+- Tx burns: Still grow with transaction volume
+- Total burns may fall short of targets
+
+**Mitigation:**
+- ✅ Competitive fees ($0.002-$0.025) attract TVL naturally
+- ✅ 500K TPS capability enables massive DeFi applications
+- ✅ Quantum-safety provides unique value proposition
+- ✅ Treasury buffer can cover temporary shortfalls
+- ✅ Governance can increase burn % (40% → 50%+) if needed
+- ✅ Can adjust protocol fee distribution via DAO vote
+
+**Likelihood:** **LOW** 
+- If transaction volume grows, TVL typically follows
+- High TPS + low fees = competitive advantage for DeFi
+- Multiple protocols (DEX, lending, staking, NFT) diversify TVL sources
+
+**Worst Case:** Even at $100M TVL forever:
+```
+Year 10 burns: 274M (tx) + 20M (protocol) = 294M IONX
+Year 10 inflation: 280M IONX
+Result: Still slightly deflationary OR use 14M treasury burn
+```
+
+### Risk 2: Competition Drives Fees to Zero
+
+**Scenario:** All L1 chains offer completely free transactions
+
+**Impact:**
+- Ionova forced to match (base fee → 0)
+- Transaction fee burns → 0
+- Only protocol revenue burns remain
+
+**Mitigation:**
+- ✅ Protocol burns alone = 20M-250M IONX/year (substantial)
+- ✅ Combined with reduced emissions = still path to equilibrium
+- ✅ Validator tips remain (not part of burn, but incentive to secure)
+- ✅ Treasury buffer covers any gaps
+- ✅ Can increase protocol burn % if tx fees drop
+- ✅ Even "free" chains have some costs (Solana ~$0.001)
+
+**Likelihood:** **VERY LOW**
+- No major chain offers truly free transactions (spam prevention)
+- Solana: $0.001, Polygon: $0.001-$0.002 (similar to Ionova)
+- Base fee prevents spam/DOS attacks (security requirement)
+- Validators need revenue to operate (economics requirement)
+
+**Worst Case:** Fees drop to $0.001:
+```
+Year 10 burns: 137M (tx at 50% rate) + 180M (protocol) = 317M IONX  
+Year 10 inflation: 280M IONX
+Result: Still deflationary by 37M IONX
+```
+
+### Risk 3: Network Attack or Major Hack
+
+**Scenario:** 51% attack, critical bug, or major exploit
+
+**Impact:**
+- User confidence drops dramatically
+- Transaction volume drops
+- TVL flees to safer chains
+- Burns drop significantly
+
+**Mitigation:**
+- ✅ **Hard to Attack:** 100 validators required for consensus
+- ✅ **Expensive:** $4B+ attack cost (at $1/IONX, 60% staked)
+- ✅ **Quantum-Resistant:** Future-proof against quantum attacks
+- ✅ **Slashing Penalties:** Make attacks costly (100% stake burned)
+- ✅ **Treasury Recovery:** Can fund bug bounties, audits, recovery
+- ✅ **Multiple Audits:** Internal + external security audits
+- ✅ **BFT Consensus:** No reorg risk, finality in 1 second
+
+**Likelihood:** **VERY LOW**
+- Byzantine Fault Tolerance prevents 51% attacks
+- Quantum-resistance protects against future threats
+- Economic security: Attack costs more than potential gain
+- Multiple layers of security (consensus + crypto + economic)
+
+**Recovery Plan if it happens:**
+- Emergency DAO vote within 24 hours
+- Deploy treasury funds for recovery
+- Increase security audits and bug bounties
+- Potential emergency protocol upgrade via governance
+
+### Risk 4: Regulatory Restrictions
+
+**Scenario:** Government bans or restricts DeFi, DEXs, or utility tokens
+
+**Impact:**
+- Protocol revenue drops if DEX/lending banned
+- Reduced TVL and transaction volume
+- Burns significantly reduced
+
+**Mitigation:**
+- ✅ **Decentralized:** No single point of control or shutdown
+- ✅ **Global Distribution:** 100 validators across jurisdictions
+- ✅ **Utility Token:** IONX has clear utility (gas, staking, governance)
+- ✅ **Compliance Ready:** Can implement KYC/AML at protocol level if required
+- ✅ **Multiple Use Cases:** Not reliant on single revenue source
+- ✅ **Treasury Flexibility:** Can pivot to compliant strategies
+
+**Likelihood:** **MEDIUM** (regulatory landscape evolving)
+
+**Adaptation Strategy:**
+- Monitor regulatory developments proactively
+- Engage with regulators for clear frameworks
+- Can implement tiered access (compliant vs permissionless)
+- Geographic diversification of validators and users
+
+### Risk 5: Tech Obsolescence
+
+**Scenario:** New blockchain technology makes Ionova obsolete
+
+**Impact:**
+- Users migrate to superior technology
+- Network activity drops
+- Burns insufficient to offset inflation
+
+**Mitigation:**
+- ✅ **Quantum-Resistant NOW:** Already ahead of curve
+- ✅ **Upgradeability:** Contracts and protocol can evolve
+- ✅ **500K TPS:** Far exceeds current demand (headroom for growth)
+- ✅ **EVM Compatible:** Can adopt Ethereum innovations
+- ✅ **Modular Design:** Can swap components (consensus, VM, etc.)
+- ✅ **Governance Upgrades:** DAO can fund R&D, implement improvements
+
+**Likelihood:** **LOW** (5-10 year horizon)
+
+**Future-Proofing:**
+- Quantum resistance provides 10-20 year advantage
+- High TPS means won't be obsoleted by speed alone
+- Active development and upgrade path
+- Treasury funds continuous innovation
+
+---
+
+## 📊 Risk Severity Matrix
+
+| Risk | Likelihood | Impact | Mitigation Strength | Overall Risk |
+|------|------------|--------|---------------------|--------------|
+| TVL Never Grows | Low | Medium | Strong | **LOW** |
+| Fees → Zero | Very Low | Medium | Strong | **VERY LOW** |
+| Network Attack | Very Low | High | Very Strong | **LOW** |
+| Regulatory | Medium | Medium | Medium | **MEDIUM** |
+| Tech Obsolescence | Low | High | Strong | **LOW** |
+
+**Overall Risk Assessment:** **LOW to MEDIUM**
+
+Most risks are mitigated through:
+1. Multi-source burn model (not reliant on one mechanism)
+2. Treasury safety buffer (225M IONX)
+3. Governance flexibility (can adjust parameters)
+4. Technical superiority (quantum-safe, 500K TPS)
+5. Economic security (high attack cost)
+
+---
+
 ## 🎯 Key Takeaways
 
 ### Sustainability
