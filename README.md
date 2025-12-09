@@ -96,10 +96,12 @@ await sdk.staking.stake(ethers.parseEther("100"));
 
 ### Economics
 
-- **Deflationary:** 50% of fees burned (equilibrium by Year 15)
+- **Multi-Source Deflation:** Transaction fees + Protocol revenue + Treasury burns
 - **Staking APR:** 8-12% (dynamic based on staking ratio)
 - **Target Staking:** 60% of total supply
 - **Total Emission:** 7.9B IONX over 15 years
+- **Deflationary:** Year 10+ (burns exceed emissions)
+- **Protocol Burns:** 40% of DEX/lending fees → buy & burn IONX
 
 ---
 

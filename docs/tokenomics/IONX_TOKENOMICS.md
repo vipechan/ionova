@@ -268,27 +268,107 @@ Year 16+: 10B + 2% annually
 
 ## 🔥 **DEFLATIONARY MECHANISMS**
 
-### 1. Transaction Fee Burning (50%)
+### Multi-Source Burn Strategy
+
+IONX uses **4 complementary burn mechanisms** to achieve sustainable deflationary pressure:
+
+### 1. Transaction Fee Burning (Base Fee - EIP-1559)
 
 ```rust
-// Half of all gas fees are burned
-let tx_fee = gas_used × gas_price;
-let burned = tx_fee × 0.5;
-let validators = tx_fee × 0.5;
+// 100% of base fee is burned
+let base_fee = calculate_dynamic_base_fee();  // Adjusts with network usage
+let priority_tip = user_tip;  // Goes to validators
 
-burn(burned);
-distributeToValidators(validators);
+burn(base_fee × gas_used);
+pay_validator(priority_tip × gas_used);
+```
+
+**Dynamic Base Fee:**
+```
+Block Utilization > 50%: Base fee increases 12.5% per block
+Block Utilization < 50%: Base fee decreases 12.5% per block
+
+Range: 0.01 - 1.0 IONX
+Typical: 0.05 IONX per transaction
 ```
 
 **Expected Burn Rate:**
 ```
-Daily Transactions:  500K
-Avg Gas Fee:        0.1 IONX
-Daily Burn:         25,000 IONX
-Yearly Burn:        9.125M IONX (~0.09% of supply)
+Year 1:  1M tx/day × 0.05 IONX = 18.25M IONX/year
+Year 5:  5M tx/day × 0.075 IONX = 136.9M IONX/year
+Year 10: 10M tx/day × 0.1 IONX = 365M IONX/year
+Year 15: 15M tx/day × 0.125 IONX = 684M IONX/year
 ```
 
-### 2. Slashing Penalties (100%)
+### 2. Protocol Revenue Burning (PRIMARY MECHANISM)
+
+**DeFi protocols distribute revenue:**
+- 40% → Buy IONX and burn
+- 50% → Liquidity providers / Users
+- 10% → Treasury
+
+**Revenue Sources:**
+```yaml
+DEX (IonovaSwap):
+  Trading fee: 0.25% per swap
+  Burn allocation: 0.10% (40% of fee)
+  
+  @ $1B annual volume:
+    Fee: $2.5M
+    Burn: $1M = 10M IONX @ $0.10
+
+Lending (IonovaLend):
+  Interest spread: 5% average
+  Burn allocation: 10% of profit
+  
+  @ $500M TVL:
+    Annual profit: $25M
+    Burn: $2.5M = 25M IONX @ $0.10
+
+Liquid Staking (stIONX):
+  Staking reward fee: 5%
+  Burn allocation: 10%
+  
+  @ 3B IONX staked, 10% APR:
+    Rewards: 300M IONX
+    Fee: 15M IONX
+    Burn: 1.5M IONX
+
+NFT Marketplace (IonNFT):
+  Trading fee: 2.5%
+  Burn allocation: 40%
+  
+  @ $100M volume:
+    Fee: $2.5M
+    Burn: $1M = 10M IONX @ $0.10
+```
+
+**Total Protocol Burns (Year 5 @ $1B TVL):**
+```
+DEX:       10M IONX
+Lending:   25M IONX
+Staking:   2M IONX
+NFT:       10M IONX
+──────────────────
+Total:     47M IONX/year (scales with TVL)
+```
+
+### 3. Treasury Burns (Governance Safety Buffer)
+
+```yaml
+Treasury allocation: 420M IONX total
+Burn reserve: 225M IONX (53%)
+
+Governance-approved strategic burns:
+  Year 1-5:   Up to 10M/year (if needed)
+  Year 6-10:  Up to 15M/year (if needed)
+  Year 11-15: Up to 20M/year (if needed)
+
+Purpose: Safety mechanism if adoption slower than projected
+Requires: DAO vote with 66% approval
+```
+
+### 4. Slashing Penalties (100%)
 
 ```yaml
 All slashed IONX is burned:
@@ -296,47 +376,52 @@ All slashed IONX is burned:
   - Downtime: 0.1-10% of stake
   - Invalid blocks: 10-100% of stake
 
-Expected Burn: ~0.01% annually
+Expected Burn: ~1M IONX annually
 ```
 
-### 3. Bridge Fees (25%)
+---
 
-```yaml
-25% of bridge fees burned:
-  - Ethereum: 0.025% burned
-  - BSC: 0.025% burned
-  - Polygon: 0.025% burned
+## 📊 **REVISED BURN SCHEDULE**
 
-Expected Burn: Minimal (TVL-dependent)
-```
+### Projected Annual Burns
 
-### 4. Governance Proposal Fees (25%)
+| Year | Inflation | Tx Burns | Protocol Burns | Treasury Burns | Total Burn | Net Inflation |
+|------|-----------|----------|----------------|----------------|------------|---------------|
+| **1**  | 800M    | 18M      | 20M            | 10M            | 48M        | +752M (7.5%)  |
+| **2**  | 700M    | 27M      | 30M            | 10M            | 67M        | +633M (6.3%)  |
+| **3**  | 600M    | 41M      | 45M            | 10M            | 96M        | +504M (5.0%)  |
+| **5**  | 500M    | 91M      | 80M            | 10M            | 181M       | +319M (3.2%)  |
+| **7**  | 400M    | 137M     | 120M           | 15M            | 272M       | +128M (1.3%)  |
+| **10** | 280M    | 274M     | 180M           | 0M             | 454M       | **-174M (-1.7%)** |
+| **15** | 200M    | 411M     | 250M           | 0M             | 661M       | **-461M (-4.6%)** |
 
-```yaml
-Failed proposals:
-  - Deposit: 1,000 IONX
-  - 25% burned if proposal fails
-  
-Expected Burn: ~100K IONX annually
-```
+**Key Milestones:**
+- **Year 7:** Near equilibrium (1.3% net inflation)
+- **Year 10:** Deflationary (-1.7%)
+- **Year 15:** Strongly deflationary (-4.6%)
 
 ### Net Effect
 
 ```
-Year 1:
-  Inflation:  +800M IONX (8%)
-  Burn:       -9.2M IONX (-0.1%)
-  Net:        +790.8M IONX (7.9%)
+Early Years (1-6):
+  High inflation offsets growing adoption
+  Burns grow with network usage
+  Net inflation: 7.5% → 2%
 
-Year 5:
-  Inflation:  +500M IONX (5%)
-  Burn:       -50M IONX (-0.5%)
-  Net:        +450M IONX (4.5%)
+Mid Years (7-10):
+  Approaching equilibrium
+  Protocol revenue burns dominate
+  Net inflation: 1.3% → -1.7%
 
-Year 15:
-  Inflation:  +200M IONX (2%)
-  Burn:       -200M IONX (-2%)
-  Net:        ~0M IONX (0% - equilibrium)
+Late Years (11-15+):
+  Strongly deflationary
+  No treasury burns needed
+  Net deflation: -2% to -4.6%
+
+Post Year 15:
+  2% perpetual emission
+  4-6% burn from usage
+  Net deflation: -2% to -4%
 ```
 
 ---
