@@ -78,24 +78,28 @@ await sdk.staking.stake(ethers.parseEther("100"));
 - **Airdrops:** 10,000,000 IONX (100k users × 100)
 - **Reserved:** 100,000 IONX
 
-### Block Rewards
+### Emission Schedule (15 Years)
 
-**Year 0-2:** 79.3 IONX/block
-**Year 2-4:** 39.65 IONX/block
-**Year 4-6:** 19.825 IONX/block
-... (halves every 2 years)
+**Annual Inflation:**
+- **Year 1:** 8.0% → 800M IONX
+- **Year 2:** 7.0% → 700M IONX
+- **Year 3:** 6.0% → 600M IONX
+- **Year 5:** 5.0% → 500M IONX
+- **Year 10:** 2.8% → 280M IONX
+- **Year 15:** 2.0% → 200M IONX
+- **Year 16+:** 2.0% perpetual
 
-**Distribution:**
-- 70% → Validators
-- 20% → Sequencers
-- 10% → Treasury
+**Reward Distribution:**
+- Validators: 60-70% of emissions
+- Delegators: 20-30% of emissions  
+- Treasury: 10% of emissions
 
 ### Economics
 
-- **Deflationary:** By Year 4 (20% of fees burned)
-- **Staking APY:** 100-791% (Year 1)
-- **Validator Revenue:** $967M/year (at $1/IONX)
-- **Sequencer Revenue:** $220M/year (at $1/IONX)
+- **Deflationary:** 50% of fees burned (equilibrium by Year 15)
+- **Staking APR:** 8-12% (dynamic based on staking ratio)
+- **Target Staking:** 60% of total supply
+- **Total Emission:** 7.9B IONX over 15 years
 
 ---
 
