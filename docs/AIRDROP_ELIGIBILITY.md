@@ -155,29 +155,56 @@ The airdrop page features:
 
 ## 📊 Budget Impact
 
+### Target: 200,000 Total Users (Including Referrals)
+
+**Distribution Model:**
+- Base users (organic): ~100,000 users
+- Referred users: ~100,000 users (1:1 referral ratio)
+- **Total participants: 200,000**
+
 ### Base Airdrop Pool
-- Target: **100,000 users**
-- Cost: 100,000 × 50 IONX = **5,000,000 IONX**
+- All 200,000 users claim: 200,000 × 50 IONX = **10,000,000 IONX**
 
 ### Referral Bonus Pool
-- **Unlimited** - paid from treasury
-- Conservative estimate: Average 2 referrals per user
-- Referral cost: 100,000 × 2 × 12.5 = **2,500,000 IONX**
+- Referrals generated: ~100,000 (1:1 ratio)
+- Bonus cost: 100,000 × 12.5 IONX = **1,250,000 IONX**
 
-### Total Estimated Cost
-- Base: 5,000,000 IONX
-- Referrals (avg 2 per user): 2,500,000 IONX
-- **Total: ~7,500,000 IONX**
+### Total Budget
+- Base claims: 10,000,000 IONX (200K users × 50 IONX)
+- Referral bonuses: 1,250,000 IONX (100K refs × 12.5 IONX)
+- **Total: 11,250,000 IONX**
 
-### Maximum Scenario
-- If every user refers 5 people:
-- Referrals: 100,000 × 5 × 12.5 = 6,250,000 IONX
-- **Maximum Total: ~11,250,000 IONX**
+### Budget Breakdown
+- Allocated for program: **12,000,000 IONX**
+- Base claims (guaranteed): 10,000,000 IONX
+- Referral bonuses: 1,250,000 IONX
+- Buffer (10%): 750,000 IONX
 
-### Budget Allocation
-- Total allocated: **10,000,000 IONX** for airdrop program
-- Base pool (guaranteed): 5,000,000 IONX
-- Referral pool: Up to 5,000,000 IONX (covers 4 refs/user avg)
+### Scenario Analysis
+
+**Conservative (0.5 ref/user avg):**
+- Base users: 133,333
+- Referred users: 66,667
+- Total: 200,000
+- Base cost: 10M IONX
+- Referral bonus: 833,333 IONX
+- **Total: 10.83M IONX**
+
+**Target (1.0 ref/user avg):**
+- Base users: 100,000
+- Referred users: 100,000
+- Total: 200,000
+- Base cost: 10M IONX
+- Referral bonus: 1.25M IONX
+- **Total: 11.25M IONX**
+
+**Optimistic (1.5 ref/user avg):**
+- Base users: 80,000
+- Referred users: 120,000
+- Total: 200,000
+- Base cost: 10M IONX
+- Referral bonus: 1.5M IONX
+- **Total: 11.5M IONX**
 
 ---
 
