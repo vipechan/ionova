@@ -63,7 +63,7 @@ await sdk.staking.stake(ethers.parseEther("100"));
 
 ---
 
-## IONX Tokenomics
+## 💎 IONX Tokenomics
 
 ### Token Details
 
@@ -71,6 +71,7 @@ await sdk.staking.stake(ethers.parseEther("100"));
 - **Type:** Native (like ETH, not ERC-20)
 - **Total Supply:** 10,000,000,000 IONX
 - **Emission:** 15 years with annual halving
+- **Staking APR:** 8-12% (dynamic)
 
 ### Genesis Allocation (12.1M IONX)
 
@@ -78,30 +79,90 @@ await sdk.staking.stake(ethers.parseEther("100"));
 - **Airdrops:** 10,000,000 IONX (100k users × 100)
 - **Reserved:** 100,000 IONX
 
-### Emission Schedule (15 Years)
+### Sustainable Multi-Source Burn Model
 
-**Annual Inflation:**
-- **Year 1:** 8.0% → 800M IONX
-- **Year 2:** 7.0% → 700M IONX
-- **Year 3:** 6.0% → 600M IONX
-- **Year 5:** 5.0% → 500M IONX
-- **Year 10:** 2.8% → 280M IONX
-- **Year 15:** 2.0% → 200M IONX
-- **Year 16+:** 2.0% perpetual
+**Four complementary deflationary mechanisms:**
 
-**Reward Distribution:**
-- Validators: 60-70% of emissions
-- Delegators: 20-30% of emissions  
-- Treasury: 10% of emissions
+#### 1. Transaction Fee Burns (EIP-1559 Enhanced)
+```
+Year 1:  1M tx/day = 18M IONX burned  
+Year 10: 10M tx/day = 365M IONX burned
+Year 15: 15M tx/day = 684M IONX burned
 
-### Economics
+100% of base fee is BURNED (not just 50%)
+```
 
-- **Multi-Source Deflation:** Transaction fees + Protocol revenue + Treasury burns
-- **Staking APR:** 8-12% (dynamic based on staking ratio)
-- **Target Staking:** 60% of total supply
-- **Total Emission:** 7.9B IONX over 15 years
+#### 2. Protocol Revenue Burns ⭐ PRIMARY
+```
+DeFi Protocols distribute 40% of fees to buyback & burn IONX:
+
+DEX (IonovaSwap):     0.10% of volume → burn
+Lending (IonovaLend): 10% of profit → burn  
+Staking (stIONX):     10% of fees → burn
+NFT (IonNFT):         1% of volume → burn
+
+Projected burns:
+Year 1:  $100M TVL = 20M IONX burned
+Year 10: $5B TVL = 180M IONX burned
+Year 15: $10B TVL = 250M IONX burned
+```
+
+#### 3. Treasury Safety Burns
+```
+225M IONX reserved for strategic burns
+DAO can vote to burn if adoption slower than projected
+Requires 66% approval
+```
+
+#### 4. Slashing Penalties
+```
+100% of slashed stake is burned
+~1M IONX/year expected
+```
+
+### Projected Burn Schedule
+
+| Year | Inflation | Total Burns | Net Inflation | Status |
+|------|-----------|-------------|---------------|--------|
+| 1 | 800M | 49M | +751M (7.5%) | Growing |
+| 5 | 500M | 182M | +318M (3.2%) | Reducing |
+| 7 | 400M | 273M | +127M (1.3%) | Near Zero |
+| **10** | **280M** | **455M** | **-175M (-1.7%)** | **✅ Deflationary** |
+| **15** | **200M** | **662M** | **-462M (-4.6%)** | **✅ Strongly Deflationary** |
+
+**Becomes deflationary by Year 10** (burns exceed emissions)
+
+### Oracle-Based Fee Governance 🆕
+
+**Problem:** At $1000/IONX, fixed fees would cost $20-$2000 per transaction
+
+**Solution:** Dynamic oracle-based pricing
+```
+At $0.10/IONX:  Base fee = 0.50 IONX = $0.05
+At $1/IONX:     Base fee = 0.05 IONX = $0.05  
+At $100/IONX:   Base fee = 0.0005 IONX = $0.05
+At $1000/IONX:  Base fee = 0.00005 IONX = $0.05
+
+Fees stay at ~$0.05 regardless of IONX price!
+```
+
+**Governance:**
+- DAO controls fee parameters (not single admin)
+- 66% approval required to adjust
+- Emergency mode with 7-day timelock
+- Multi-oracle consensus prevents manipulation
+
+**[Full details →](docs/FEE_GOVERNANCE.md)**
+
+### Economics Summary
+
 - **Deflationary:** Year 10+ (burns exceed emissions)
-- **Protocol Burns:** 40% of DEX/lending fees → buy & burn IONX
+- **Oracle Pricing:** Stable USD costs at any IONX price
+- **Multi-Source Burns:** Transaction fees + protocol revenue + treasury
+- **DAO Governed:** Token holders control parameters
+- **Staking APR:** 8-12% (60% target ratio)
+- **Total Emission:** 7.9B IONX over 15 years
+- **Risk-Mitigated:** [5 major risks assessed](docs/tokenomics/SUSTAINABLE_BURN_MODEL.md)
 
 ---
 
