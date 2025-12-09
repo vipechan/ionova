@@ -70,7 +70,7 @@ await sdk.staking.stake(ethers.parseEther("100"));
 - **Symbol:** IONX
 - **Type:** Native (like ETH, not ERC-20)
 - **Total Supply:** 10,000,000,000 IONX
-- **Emission:** 30 years with 2-year halving
+- **Emission:** 15 years with annual halving
 
 ### Genesis Allocation (12.1M IONX)
 
