@@ -1,0 +1,649 @@
+/* Home Page Styles */
+
+.home-page {
+    min-height: 100vh;
+    background: var(--bg-primary);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 77, 77, 0.3), transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(138, 80, 190, 0.3), transparent 50%);
+    animation: pulse 10s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.badge-pulse {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 800;
+    margin: 0 0 1rem;
+    line-height: 1.1;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin: 0 0 1rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+.hero-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    opacity: 0.85;
+    line-height: 1.6;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    display: block;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Features Section */
+.features {
+    padding: 6rem 2rem;
+    background: var(--bg-primary);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    border-color: #667eea;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-icon.quantum {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.feature-icon.performance {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.feature-icon.economics {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.feature-icon.fees {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.feature-icon.developer {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.feature-icon.ecosystem {
+    background: linear-gradient(135deg, #ec4899, #db2777);
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    opacity: 0.8;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.feature-badge {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Comparison Table */
+.comparison {
+    padding: 6rem 2rem;
+    background: var(--bg-secondary);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.25rem;
+    opacity: 0.7;
+    margin-bottom: 3rem;
+}
+
+.comparison-table-container {
+    overflow-x: auto;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-primary);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comparison-table thead th {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+.comparison-table th.highlight,
+.comparison-table td.highlight {
+    background: rgba(102, 126, 234, 0.1);
+    font-weight: 600;
+}
+
+.comparison-table tbody tr:hover {
+    background: rgba(102, 126, 234, 0.05);
+}
+
+.comparison-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.advantage {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.advantage-icon {
+    font-size: 2rem;
+}
+
+/* Tokenomics Preview */
+.tokenomics-preview {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+}
+
+.tokenomics-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.lead {
+    font-size: 1.25rem;
+    opacity: 0.8;
+    margin-bottom: 3rem;
+}
+
+.burn-sources {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.burn-source {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.burn-source.primary {
+    border-color: #fbbf24;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(245, 158, 11, 0.1));
+}
+
+.burn-source:hover {
+    transform: translateX(5px);
+}
+
+.burn-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.burn-details h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+}
+
+.burn-details p {
+    opacity: 0.7;
+    margin: 0 0 0.75rem;
+}
+
+.burn-stat {
+    display: inline-block;
+    padding: 0.35rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.deflationary-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+}
+
+.timeline-item {
+    text-align: center;
+    padding: 1rem 1.5rem;
+    background: var(--bg-primary);
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+    min-width: 120px;
+}
+
+.timeline-item.active {
+    border-color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+}
+
+.timeline-year {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-status {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+.timeline-status.growing {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.timeline-status.near-zero {
+    background: rgba(251, 191, 36, 0.1);
+    color: #fbbf24;
+}
+
+.timeline-status.deflationary {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    font-weight: 700;
+}
+
+.timeline-status.strong-deflationary {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.timeline-arrow {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+/* Oracle Governance */
+.oracle-governance {
+    padding: 6rem 2rem;
+    background: var(--bg-primary);
+}
+
+.oracle-demo {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.price-scenario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.scenario-card {
+    padding: 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    text-align: center;
+    min-width: 150px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.scenario-card.highlight {
+    border-color: #10b981;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+}
+
+.scenario-card:hover {
+    transform: scale(1.05);
+}
+
+.ionx-price {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.base-fee {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.usd-cost {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+}
+
+.scenario-arrow {
+    font-size: 1.5rem;
+    opacity: 0.5;
+}
+
+.oracle-features {
+    display: grid;
+    gap: 1rem;
+}
+
+.oracle-feature {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.oracle-feature svg {
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.cta-section p {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #667eea;
+}
+
+.social-proof {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.proof-item {
+    text-align: center;
+}
+
+.proof-item strong {
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.proof-item span {
+    opacity: 0.8;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: 6rem 0;
+    }
+
+    .features,
+    .comparison,
+    .tokenomics-preview,
+    .oracle-governance,
+    .cta-section {
+        padding: 4rem 1rem;
+    }
+
+    .comparison-table {
+        font-size: 0.85rem;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+        padding: 0.75rem 0.5rem;
+    }
+}
