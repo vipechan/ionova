@@ -35,7 +35,11 @@ export default function Airdrop() {
         <div className="airdrop-container">
             <div className="airdrop-hero">
                 <h1>🪂 Ionova Social Airdrop</h1>
-                <p>Complete social tasks to earn <strong>100 IONX</strong>. Manual verification required.</p>
+                <p>Complete social tasks to earn <strong>50 IONX</strong> + <strong>12.5 IONX per referral</strong>. Manual verification required.</p>
+                <div className="airdrop-info-badges">
+                    <span className="badge">💰 50 IONX Base Reward</span>
+                    <span className="badge">👥 12.5 IONX Per Referral</span>
+                </div>
             </div>
 
             <div className="airdrop-card">
@@ -52,8 +56,11 @@ export default function Airdrop() {
                 {status === 'eligible' ? (
                     <div className="claim-content">
                         <div className="reward-amount">
-                            <span className="label">Potential Reward</span>
-                            <span className="amount">100 IONX</span>
+                            <span className="label">Base Reward</span>
+                            <span className="amount">50 IONX</span>
+                        </div>
+                        <div className="referral-info">
+                            <p className="info-text">💡 <strong>Earn More:</strong> Get <strong>12.5 IONX</strong> for each person who connects their wallet using your referral link!</p>
                         </div>
 
                         <div className="social-tasks">
@@ -99,7 +106,8 @@ export default function Airdrop() {
                     <div className="success-message">
                         <h3>Submission Received!</h3>
                         <p>Your wallet <strong>{checkAddress}</strong> is under review.</p>
-                        <p>Once verified by an admin, 100 IONX will be transferred to your wallet.</p>
+                        <p>Once verified by an admin, 50 IONX will be transferred to your wallet.</p>
+                        <p className="referral-note">💡 Share your referral link to earn an additional <strong>12.5 IONX per friend</strong> who connects their wallet!</p>
                         <div className="verification-status-box">
                             <span className="spinner-small"></span> Awaiting Admin Approval
                         </div>
@@ -133,8 +141,14 @@ export default function Airdrop() {
 
             <div className="airdrop-stats">
                 <div className="stat-box">
-                    <h3>Total Airdrop</h3>
-                    <p>100,000 IONX</p>
+                    <h3>Total Airdrop Pool</h3>
+                    <p>50,000 IONX</p>
+                    <small>Base rewards only</small>
+                </div>
+                <div className="stat-box">
+                    <h3>Referral Bonus Pool</h3>
+                    <p>Unlimited</p>
+                    <small>12.5 IONX per referral</small>
                 </div>
                 <div className="stat-box">
                     <h3>Pending Review</h3>
