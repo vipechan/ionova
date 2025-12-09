@@ -296,21 +296,21 @@ export default function Airdrop() {
             <div className="airdrop-stats">
                 <div className="stat-box">
                     <h3>Total Airdrop Pool</h3>
-                    <p>50,000 IONX</p>
-                    <small>Base rewards only</small>
+                    <p>5,000,000 IONX</p>
+                    <small>100K users @ 50 IONX each</small>
                 </div>
                 <div className="stat-box">
                     <h3>Referral Bonus Pool</h3>
-                    <p>Unlimited</p>
-                    <small>12.5 IONX per referral</small>
+                    <p>5,000,000 IONX</p>
+                    <small>12.5 IONX per referral, ~400K refs</small>
                 </div>
                 <div className="stat-box">
                     <h3>Pending Review</h3>
-                    <p>1,250 Users</p>
+                    <p>2,450 Users</p>
                 </div>
                 <div className="stat-box">
-                    <h3>Verified</h3>
-                    <p>8,450 Users</p>
+                    <h3>Verified & Claimed</h3>
+                    <p>12,850 Users</p>
                 </div>
             </div>
 

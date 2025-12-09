@@ -156,18 +156,28 @@ The airdrop page features:
 ## 📊 Budget Impact
 
 ### Base Airdrop Pool
-- Target: 1,000 users
-- Cost: 1,000 × 50 IONX = **50,000 IONX**
+- Target: **100,000 users**
+- Cost: 100,000 × 50 IONX = **5,000,000 IONX**
 
 ### Referral Bonus Pool
 - **Unlimited** - paid from treasury
-- Average 2 referrals per user = 25,000 IONX additional
-- Maximum theoretical: Unlimited
+- Conservative estimate: Average 2 referrals per user
+- Referral cost: 100,000 × 2 × 12.5 = **2,500,000 IONX**
 
 ### Total Estimated Cost
-- Base: 50,000 IONX
-- Referrals (avg): 25,000 IONX
-- **Total: ~75,000 IONX**
+- Base: 5,000,000 IONX
+- Referrals (avg 2 per user): 2,500,000 IONX
+- **Total: ~7,500,000 IONX**
+
+### Maximum Scenario
+- If every user refers 5 people:
+- Referrals: 100,000 × 5 × 12.5 = 6,250,000 IONX
+- **Maximum Total: ~11,250,000 IONX**
+
+### Budget Allocation
+- Total allocated: **10,000,000 IONX** for airdrop program
+- Base pool (guaranteed): 5,000,000 IONX
+- Referral pool: Up to 5,000,000 IONX (covers 4 refs/user avg)
 
 ---
 
