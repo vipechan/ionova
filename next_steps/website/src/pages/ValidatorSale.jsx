@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import SaleDashboard from '../components/SaleDashboard';
+import EnhancedSaleDashboard from '../components/EnhancedSaleDashboard';
 import PurchaseForm from '../components/PurchaseForm';
 import HoldingsView from '../components/HoldingsView';
 import AffiliatePanel from '../components/AffiliatePanel';
+import PurchaseHistory from '../components/PurchaseHistory';
 
 export default function ValidatorSale() {
     const [activeTab, setActiveTab] = useState('buy');
@@ -37,6 +38,12 @@ export default function ValidatorSale() {
                     💼 My Holdings
                 </button>
                 <button
+                    className={`tab ${activeTab === 'history' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('history')}
+                >
+                    📜 Purchase History
+                </button>
+                <button
                     className={`tab ${activeTab === 'affiliate' ? 'active' : ''}`}
                     onClick={() => setActiveTab('affiliate')}
                 >
@@ -46,7 +53,7 @@ export default function ValidatorSale() {
 
             {/* Tab Content */}
             <div className="tab-content">
-                {activeTab === 'overview' && <SaleDashboard />}
+                {activeTab === 'overview' && <EnhancedSaleDashboard />}
                 {activeTab === 'buy' && (
                     <div className="buy-tab">
                         <div className="buy-layout">
@@ -88,6 +95,7 @@ export default function ValidatorSale() {
                     </div>
                 )}
                 {activeTab === 'holdings' && <HoldingsView />}
+                {activeTab === 'history' && <PurchaseHistory />}
                 {activeTab === 'affiliate' && <AffiliatePanel />}
             </div>
 
