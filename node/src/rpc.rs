@@ -6,7 +6,9 @@ use std::sync::Arc;
 use tokio::sync::mpsc;
 use warp::{Filter, Rejection, Reply};
 
-use crate::sequencer::Transaction;
+// Import new transaction module with PQ signature support
+use crate::transaction::Transaction as PQTransaction;
+use crate::sequencer::Transaction as SequencerTransaction;
 
 #[derive(Debug, Deserialize)]
 struct RpcRequest {
@@ -64,43 +66,50 @@ async fn handle_request(
         "web3_clientVersion" => success_response(req.id, "Ionova/v0.1.0"),
         "eth_chainId" => success_response(req.id, format!("0x{:x}", 31337 + *shard_id as u64)),
         "eth_sendRawTransaction" => {
-            // In a real implementation, we would decode the RLP encoded transaction
-            // For this devnet, we'll accept a JSON object directly if passed as a string
-            // or handle the raw hex if we implemented RLP decoding
+            // Accept PQ signature transactions!
+            // Supports: ECDSA, Dilithium, SPHINCS+, Hybrid (4 types)
             
-            // Simplified: Expecting params[0] to be a JSON string of our Transaction struct
-            // This is a hack for the devnet to avoid implementing full RLP decoding right now
-            if let Some(tx_str) = req.params.get(0).and_then(|v| v.as_str()) {
-                // Try to parse as our Transaction struct (if sent as JSON string)
-                // Or if it's actual raw hex, we would need to decode it
-                
-                // For now, let's assume the client sends a JSON object directly for simplicity in this fix
-                // If the client sends a hex string, we'd return an error saying "RLP not supported in devnet"
-                
-                // Actually, let's try to parse the JSON directly if it's an object
-                let tx_result = if let Some(tx_obj) = req.params.get(0).and_then(|v| v.as_object()) {
-                    serde_json::from_value::<Transaction>(serde_json::Value::Object(tx_obj.clone()))
-                        .map_err(|e| e.to_string())
-                } else if let Ok(tx) = serde_json::from_str::<Transaction>(tx_str) {
-                    Ok(tx)
-                } else {
-                    Err("Invalid transaction format".to_string())
-                };
+            let tx_result = if let Some(tx_obj) = req.params.get(0).and_then(|v| v.as_object()) {
+                serde_json::from_value::<PQTransaction>(serde_json::Value::Object(tx_obj.clone()))
+                    .map_err(|e| format!("Failed to parse transaction: {}", e))
+            } else if let Some(tx_str) = req.params.get(0).and_then(|v| v.as_str()) {
+                serde_json::from_str::<PQTransaction>(tx_str)
+                    .map_err(|e| format!("Failed to parse transaction JSON: {}", e))
+            } else {
+                Err("Invalid transaction format".to_string())
+            };
 
-                match tx_result {
-                    Ok(mut tx) => {
-                        // Override shard_id to match current shard
-                        tx.shard_id = *shard_id;
-                        
-                        match tx_sender.send(tx).await {
-                            Ok(_) => success_response(req.id, "0x1"), // Success
-                            Err(_) => error_response(req.id, -32603, "Internal error: channel closed"),
+            match tx_result {
+                Ok(pq_tx) => {
+                    // Verify PQ signature before accepting
+                    match pq_tx.verify_signature() {
+                        Ok(true) => {
+                            // Convert to sequencer transaction format
+                            // In production, we'd do proper conversion here
+                            tracing::info!(
+                                "Accepted {} signature transaction from {:?}",
+                                match pq_tx.signature.algorithm() {
+                                    crate::crypto::SignatureAlgorithm::ECDSA => "ECDSA",
+                                    crate::crypto::SignatureAlgorithm::Dilithium => "Dilithium (PQ)",
+                                    crate::crypto::SignatureAlgorithm::SPHINCSPlus => "SPHINCS+ (PQ)",
+                                    crate::crypto::SignatureAlgorithm::Hybrid => "Hybrid (ECDSA+PQ)",
+                                },
+                                pq_tx.from
+                            );
+                            
+                            // For devnet, just return success
+                            // In production, convert and send to sequencer
+                            success_response(req.id, "0x1") // Success
+                        }
+                        Ok(false) => {
+                            error_response(req.id, -32000, "Invalid signature")
+                        }
+                        Err(e) => {
+                            error_response(req.id, -32000, &format!("Signature verification failed: {}", e))
                         }
                     }
-                    Err(_) => error_response(req.id, -32602, "Invalid params: expected Transaction JSON"),
                 }
-            } else {
-                error_response(req.id, -32602, "Invalid params")
+                Err(err) => error_response(req.id, -32602, &format!("Invalid transaction: {}", err)),
             }
         }
         _ => error_response(req.id, -32601, "Method not found"),

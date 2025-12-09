@@ -34,6 +34,7 @@ out/
 *.swo
 *~
 .DS_Store
+*.sublime-*
 
 # Hardhat files
 cache/
@@ -45,6 +46,8 @@ typechain-types/
 coverage/
 coverage.json
 *.lcov
+lcov-report/
+.nyc_output/
 
 # Logs
 logs/
@@ -79,3 +82,22 @@ Thumbs.db
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+
+# Compressed archives
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+venv/
+env/
+*.egg-info/
+
+# Test coverage
+.coverage
+htmlcov/

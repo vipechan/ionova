@@ -12,24 +12,73 @@ name = "load_generator"
 path = "src/bin/load_generator.rs"
 
 [dependencies]
+# Core Runtime
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 clap = { version = "4", features = ["derive"] }
 anyhow = "1"
 thiserror = "1"
+
+# Logging & Tracing (SECURITY FIX L-2)
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+
+# Blockchain
 rust_decimal = "1.33"
 rust_decimal_macros = "1.33"
-prometheus = { version = "0.13", features = ["process"] }
+
+# Networking & RPC
 warp = "0.3"
 futures = "0.3"
+
+# SECURITY FIX M-2: Rate Limiting
+governor = "0.6"
+parking_lot = "0.12"
+
+# Configuration (SECURITY FIX L-5)
+toml = "0.8"
+
+# Cryptography
 rand = "0.8"
 sha2 = "0.10"
 hex = "0.4"
 
-# EVM support
+# ECDSA
+secp256k1 = { version = "0.29", features = ["recovery", "std"] }
+
+# Post-Quantum Cryptography (SECURITY FIX H-3: Falcon removed)
+pqcrypto-dilithium = "0.5"
+pqcrypto-sphincsplus = "0.7"
+pqcrypto-traits = "0.3"
+
+# EVM
 revm = { version = "14", features = ["std", "serde"] }
 alloy-primitives = "0.8"
 alloy-sol-types = "0.8"
+
+# Metrics
+prometheus = { version = "0.13", features = ["process"] }
+
+# P2P Networking (MAINNET REQUIREMENT)
+libp2p = { version = "0.53", features = ["tcp", "noise", "mplex", "gossipsub", "mdns", "kad", "identify"] }
+libp2p-swarm = "0.44"
+futures-util = "0.3"
+
+# Async channels for consensus
+tokio-util = { version = "0.7", features = ["codec"] }
+
+# Quantum-Resistant Hashing
+sha3 = "0.10"
+blake3 = "1.5"
+
+# zk-SNARK Proving Systems
+ark-std = "0.4"
+ark-ff = "0.4"
+ark-ec = "0.4"
+ark-serialize = "0.4"
+ark-groth16 = "0.4"
+ark-bn254 = "0.4"
+halo2_proofs = "0.3"
+bellman = "0.14"
+

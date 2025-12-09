@@ -37,8 +37,8 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
 
     // Pricing (in USDC/USDT with 6 decimals)
     uint256 public constant START_PRICE = 10 * 10**6; // $10
-    uint256 public constant END_PRICE = 100 * 10**6; // $100
-    uint256 public constant PRICE_RANGE = END_PRICE - START_PRICE; // $90
+    uint256 public constant END_PRICE = 1000 * 10**6; // $1000
+    uint256 public constant PRICE_RANGE = END_PRICE - START_PRICE; // $990
     
     // IONX Emission Schedule
     uint256 public constant INITIAL_DAILY_EMISSION = 1_000_000 * 10**18; // 1M IONX/day
@@ -98,6 +98,7 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
     mapping(AffiliateRank => RankRequirement) public rankRequirements;
     
     uint256 public totalCommissionsPaid;
+    uint256 public kycThreshold = 100; // Admin-configurable KYC threshold (default: 100 fractions)
 
     // Events
     event FractionPurchased(address indexed buyer, uint256 indexed fractionId, uint256 price);
@@ -201,6 +202,15 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
     function setKYCRequired(bool required) external onlyOwner {
         kycRequired = required;
     }
+    
+    function setKYCThreshold(uint256 newThreshold) external onlyOwner {
+        require(newThreshold > 0, "Threshold must be > 0");
+        kycThreshold = newThreshold;
+    }
+    
+    function getKYCThreshold() external view returns (uint256) {
+        return kycThreshold;
+    }
 
     // Sale Time Management
     function setSaleTimes(uint256 _startTime, uint256 _endTime) external onlyOwner {
@@ -234,11 +244,16 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
         return totalCost;
     }
 
-    // Purchase
-    function buyFractions(uint256 quantity, address referrer, address paymentToken) external nonReentrant whenNotPaused whenSaleActive onlyKYCVerified {
+    // Purchase - KYC required based on admin-set threshold
+    function buyFractions(uint256 quantity, address referrer, address paymentToken) external nonReentrant whenNotPaused whenSaleActive {
         require(quantity > 0, "Must buy at least 1");
         require(fractionsSold + quantity <= TOTAL_FRACTIONS, "Exceeds available");
         require(supportedTokens[paymentToken], "Unsupported payment token");
+        
+        // KYC required for purchases above threshold (default: >100 fractions)
+        if (quantity > kycThreshold) {
+            require(kycVerified[msg.sender], "KYC required for large purchases");
+        }
         
         uint256 totalCost = getTotalCost(quantity);
         

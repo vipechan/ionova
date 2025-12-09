@@ -9,11 +9,14 @@ mod staking;
 mod security;
 mod network_security;
 mod rpc;
+mod crypto;  // Post-quantum signature support
+mod transaction;  // Quantum-safe transactions
+mod rate_limit;  // SECURITY FIX M-2
+mod config;  // SECURITY FIX L-5
 
 use anyhow::Result;
 use clap::{Parser, Subcommand};
 use rust_decimal_macros::dec;
-use std::fs;
 use tokio::sync::mpsc;
 use tracing::info;
 

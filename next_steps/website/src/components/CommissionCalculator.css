@@ -1,0 +1,670 @@
+/* Commission Calculator Styles */
+
+.commission-calculator {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #fff;
+    padding: 40px;
+}
+
+.calculator-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.calculator-header h1 {
+    font-size: 36px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.calculator-header p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Input Section */
+.calculator-inputs {
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.input-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.input-card h3 {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+.input-group input[type="number"],
+.input-group select {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.input-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.total-amount {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border: 2px solid #667eea;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.total-value {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Commission Flow */
+.commission-flow {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.commission-flow h2 {
+    margin: 0 0 30px 0;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.flow-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.purchase-node,
+.treasury-node {
+    background: rgba(102, 126, 234, 0.2);
+    border: 2px solid #667eea;
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    min-width: 300px;
+}
+
+.node-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.node-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.node-amount {
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+}
+
+.node-detail {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.flow-arrow {
+    font-size: 32px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.commission-split {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.split-label {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.affiliate-node {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 4px solid;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 0.3s;
+}
+
+.affiliate-node:hover {
+    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.affiliate-node.level-1 {
+    border-left-color: #667eea;
+}
+
+.affiliate-node.level-2 {
+    border-left-color: #764ba2;
+}
+
+.affiliate-node.level-3 {
+    border-left-color: #f59e0b;
+}
+
+.affiliate-node.level-4 {
+    border-left-color: #ef4444;
+}
+
+.affiliate-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.level-badge {
+    background: rgba(102, 126, 234, 0.3);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.rank-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.rank-badge.rank-starter {
+    background: rgba(148, 163, 184, 0.3);
+}
+
+.rank-badge.rank-bronze {
+    background: rgba(205, 127, 50, 0.3);
+}
+
+.rank-badge.rank-silver {
+    background: rgba(192, 192, 192, 0.3);
+}
+
+.rank-badge.rank-gold {
+    background: rgba(255, 215, 0, 0.3);
+}
+
+.affiliate-address {
+    font-family: monospace;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.affiliate-name {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 12px;
+}
+
+.commission-calc {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.calc-formula {
+    font-family: monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.calc-result {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+.commission-badge {
+    text-align: right;
+    font-size: 20px;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+/* Breakdown Table */
+.commission-breakdown {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+}
+
+.breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.breakdown-table th {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.breakdown-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.affiliate-cell {
+    font-family: monospace;
+}
+
+.affiliate-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.affiliate-addr {
+    font-weight: 600;
+}
+
+.affiliate-nm {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.rate-badge {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.calc-cell {
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.commission-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+.total-row {
+    background: rgba(102, 126, 234, 0.1);
+    border-top: 2px solid #667eea;
+    font-weight: 700;
+}
+
+.total-amount {
+    font-size: 20px;
+    color: #4ade80;
+}
+
+.treasury-row {
+    background: rgba(245, 158, 11, 0.1);
+    font-weight: 700;
+}
+
+.treasury-amount {
+    font-size: 20px;
+    color: #fbbf24;
+}
+
+/* Rank Comparison */
+.rank-comparison {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.rank-comparison h2 {
+    margin: 0 0 12px 0;
+    font-size: 28px;
+}
+
+.comparison-note {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 30px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.rank-card {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+}
+
+.rank-card.active {
+    border-color: #667eea;
+    box-shadow: 0 0 30px rgba(102, 126, 234, 0.4);
+    transform: scale(1.05);
+}
+
+.rank-card.rank-starter {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.1) 0%, rgba(203, 213, 225, 0.1) 100%);
+}
+
+.rank-card.rank-bronze {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+}
+
+.rank-card.rank-silver {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, rgba(224, 224, 224, 0.1) 100%);
+}
+
+.rank-card.rank-gold {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 237, 78, 0.1) 100%);
+}
+
+.rank-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.rank-icon {
+    font-size: 32px;
+}
+
+.rank-name {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.rank-rates {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.rate-item {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.rank-separator {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 16px 0;
+}
+
+.earnings-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+}
+
+.earnings-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.earnings-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.earnings-amount {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.earnings-total {
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: right;
+    font-size: 16px;
+}
+
+/* Example Scenarios */
+.example-scenarios {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.scenarios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.scenario-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.scenario-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    color: #667eea;
+}
+
+.scenario-details {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.scenario-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.scenario-commissions {
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.scenario-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #4ade80;
+}
+
+.scenario-breakdown {
+    font-size: 13px;
+}
+
+.scenario-breakdown>div {
+    margin-bottom: 6px;
+}
+
+.scenario-total {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(74, 222, 128, 0.3);
+    font-size: 16px;
+    font-weight: 700;
+    color: #4ade80;
+}
+
+/* Info Section */
+.info-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 24px;
+}
+
+.info-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.info-box h3 {
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-box ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.info-box li {
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .commission-calculator {
+        padding: 20px;
+    }
+
+    .comparison-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .scenarios-grid,
+    .info-section {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .calculator-header h1 {
+        font-size: 28px;
+    }
+
+    .flow-diagram {
+        padding: 20px 10px;
+    }
+
+    .purchase-node,
+    .treasury-node {
+        min-width: 250px;
+    }
+
+    .breakdown-table {
+        font-size: 12px;
+    }
+
+    .rank-rates {
+        grid-template-columns: 1fr;
+    }
+}

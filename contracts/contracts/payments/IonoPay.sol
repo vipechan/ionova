@@ -86,15 +86,15 @@ contract IonoPay is Ownable, ReentrancyGuard, Pausable {
     
     // ============ Modifiers ============
     
-    modifier rateLimited(address user) {
-        _checkRateLimit(user);
+    modifier rateLimited() {
+        _checkRateLimit(msg.sender);
         _;
-        _incrementPaymentCount(user);
+        _incrementPaymentCount(msg.sender);
     }
     
     // ============ Constructor ============
     
-    constructor() Ownable(msg.sender) {}
+    constructor() {}
     
     // ============ Payment Functions ============
     
@@ -108,7 +108,7 @@ contract IonoPay is Ownable, ReentrancyGuard, Pausable {
         address to,
         bytes32 invoiceId,
         string calldata memo
-    ) external payable nonReentrant whenNotPaused rateLimited(msg.sender) {
+    ) external payable nonReentrant whenNotPaused rateLimited {
         require(to != address(0), "Invalid recipient");
         require(msg.value > 0, "Amount must be greater than 0");
         require(to != msg.sender, "Cannot send to self");

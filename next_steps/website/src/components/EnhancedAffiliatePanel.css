@@ -1,0 +1,614 @@
+/* Enhanced Affiliate Panel Styles */
+
+.enhanced-affiliate-panel {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #fff;
+    padding: 40px;
+}
+
+.affiliate-header {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.affiliate-header h1 {
+    margin: 0;
+    font-size: 36px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rank-badge {
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: pulse 2s infinite;
+}
+
+.rank-badge.rank-starter {
+    background: linear-gradient(45deg, #94a3b8 0%, #cbd5e1 100%);
+    box-shadow: 0 4px 15px rgba(148, 163, 184, 0.4);
+}
+
+.rank-badge.rank-bronze {
+    background: linear-gradient(45deg, #cd7f32 0%, #d4af37 100%);
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
+}
+
+.rank-badge.rank-silver {
+    background: linear-gradient(45deg, #c0c0c0 0%, #e0e0e0 100%);
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.4);
+    color: #1e1e2e;
+}
+
+.rank-badge.rank-gold {
+    background: linear-gradient(45deg, #ffd700 0%, #ffed4e 100%);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.6);
+    color: #1e1e2e;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Quick Stats */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+}
+
+.stat-icon {
+    font-size: 40px;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+}
+
+.stat-subtext {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Referral Section */
+.referral-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.referral-section h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.referral-link-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.referral-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(102, 126, 234, 0.5);
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    font-size: 16px;
+    font-family: monospace;
+}
+
+.copy-btn {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.copy-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.copy-btn.copied {
+    background: linear-gradient(45deg, #4ade80 0%, #22c55e 100%);
+}
+
+.social-share h3 {
+    font-size: 16px;
+    margin: 0 0 16px 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.social-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+}
+
+.social-btn.twitter {
+    background: #1DA1F2;
+}
+
+.social-btn.facebook {
+    background: #4267B2;
+}
+
+.social-btn.telegram {
+    background: #0088cc;
+}
+
+.social-btn.whatsapp {
+    background: #25D366;
+}
+
+.social-btn.linkedin {
+    background: #0077b5;
+}
+
+/* Rank Progress */
+.rank-progress-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.rank-progress-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.current-next-ranks {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.rank-item {
+    text-align: center;
+}
+
+.rank-icon {
+    font-size: 64px;
+    margin-bottom: 12px;
+}
+
+.rank-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.rank-commission {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.rank-arrow {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.progress-bar-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    height: 32px;
+    margin: 16px 0;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 12px;
+    transition: width 0.5s ease;
+}
+
+.progress-percentage {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.progress-requirements {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Achievements */
+.achievements-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.achievement-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.achievement-card.earned {
+    border-color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+}
+
+.achievement-card.locked {
+    opacity: 0.5;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+}
+
+.achievement-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.achievement-name {
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.earned-badge {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.locked-badge {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.progress-bar-mini {
+    background: rgba(0, 0, 0, 0.3);
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.progress-fill-mini {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    height: 100%;
+}
+
+.achievement-prize {
+    font-size: 14px;
+    color: #fbbf24;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+/* Targets */
+.targets-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.target-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.target-card h3 {
+    margin: 0 0 16px 0;
+    font-size: 18px;
+}
+
+.target-amount {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.target-progress-bar {
+    background: rgba(0, 0, 0, 0.3);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.target-progress-fill {
+    background: linear-gradient(90deg, #4ade80 0%, #22c55e 100%);
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.target-status {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.target-rewards {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.target-rewards h4 {
+    margin: 0 0 12px 0;
+}
+
+.target-rewards ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.target-rewards li {
+    margin: 8px 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Leaderboard */
+.leaderboard-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.leaderboard-table {
+    overflow-x: auto;
+}
+
+.leaderboard-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.leaderboard-table th {
+    text-align: left;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.leaderboard-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-table tr.top-1,
+.leaderboard-table tr.top-2,
+.leaderboard-table tr.top-3 {
+    background: rgba(255, 215, 0, 0.05);
+}
+
+.leaderboard-table tr.current-user {
+    background: rgba(102, 126, 234, 0.2);
+    font-weight: 700;
+}
+
+.rank-medal {
+    font-size: 24px;
+}
+
+/* Marketing Materials */
+.marketing-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.marketing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.marketing-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+}
+
+.marketing-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+}
+
+.marketing-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.download-btn {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Recent Referrals */
+.recent-referrals-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.referrals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.referral-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.referral-address {
+    font-family: monospace;
+}
+
+.referral-earnings {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.referral-time {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .enhanced-affiliate-panel {
+        padding: 20px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .quick-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+
+    .social-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .referral-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}

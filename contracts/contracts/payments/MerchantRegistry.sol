@@ -99,7 +99,7 @@ contract MerchantRegistry is Ownable, Pausable {
     
     // ============ Constructor ============
     
-    constructor() Ownable(msg.sender) {}
+    constructor() {}
     
     // ============ Merchant Functions ============
     

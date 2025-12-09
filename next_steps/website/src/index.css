@@ -1,3 +1,91 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    /* -- Etherscan-like Light Theme -- */
+
+    /* Backgrounds */
+    --bg-main: #f8f9fa;
+    /* Main page background */
+    --bg-light: #f8f9fa;
+    /* Secondary background */
+    --bg-white: #ffffff;
+    /* Card background */
+    --bg-hover: #f1f2f4;
+    /* Hover state */
+
+    /* Text */
+    --text-primary: #212529;
+    /* Main text */
+    --text-secondary: #4a4f55;
+    /* Secondary text */
+    --text-muted: #6c757d;
+    /* Muted text */
+
+    /* Brand Colors */
+    --primary: #0784c3;
+    /* Etherscan Blue */
+    --primary-hover: #0670a6;
+    --primary-light: #e6f2f8;
+    --secondary: #3498db;
+
+    /* Status Colors */
+    --success: #00c9a7;
+    /* Green */
+    --warning: #de4437;
+    /* Red (using for down trends) */
+    --error: #de4437;
+    --info: #0784c3;
+
+    /* Borders */
+    --border-color: #e7eaf3;
+    /* Subtle border */
+    --border-dark: #d4d7dc;
+
+    /* Shadows */
+    --shadow-sm: 0 0.5rem 1.2rem rgb(189 197 209 / 20%);
+    --shadow-md: 0 1rem 3rem rgb(189 197 209 / 20%);
+    --shadow-lg: 0 2rem 6rem rgb(189 197 209 / 20%);
+
+    /* Gradients (Optional, kept for compatibility but muted) */
+    --gradient-primary: linear-gradient(135deg, #0784c3 0%, #0670a6 100%);
+    --glass-blur: blur(10px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    /* More standard font */
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+}
+
+/* Global Scrollbar - Light Theme */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-dark);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}

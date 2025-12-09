@@ -1,0 +1,130 @@
+version: '3.8'
+
+services:
+  # Validators (5 for testnet)
+  validator-0:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.validator
+    container_name: ionova-testnet-validator-0
+    command: validator --id 0
+    ports:
+      - "26656:26656"
+      - "26657:26657"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - validator-0-data:/data
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  validator-1:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.validator
+    container_name: ionova-testnet-validator-1
+    command: validator --id 1
+    ports:
+      - "26666:26656"
+      - "26667:26657"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - validator-1-data:/data
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Sequencers (16 shards for testnet = 80K TPS)
+  sequencer-0:
+    build:
+      context: ../node
+      dockerfile: ../devnet/Dockerfile.sequencer
+    container_name: ionova-testnet-sequencer-0
+    command: sequencer --shard-id 0 --metrics-port 9100 --rpc-port 27000
+    ports:
+      - "27000:27000" # Public RPC
+      - "9100:9100"
+    volumes:
+      - ./genesis.json:/config/genesis.json:ro
+      - sequencer-0-data:/data
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Add more sequencers (1-15) here...
+
+  # Block Explorer Backend
+  explorer-api:
+    build: ../explorer/server
+    container_name: ionova-explorer-api
+    ports:
+      - "4000:4000"
+    environment:
+      - RPC_URL=http://sequencer-0:27000
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Block Explorer Frontend
+  explorer-ui:
+    build: ../explorer
+    container_name: ionova-explorer-ui
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:4000
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Faucet Service
+  faucet:
+    build: ../faucet
+    container_name: ionova-faucet
+    ports:
+      - "5000:5000"
+    environment:
+      - RPC_URL=http://sequencer-0:27000
+      - FAUCET_AMOUNT=100
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ionova-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ionova-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+    networks:
+      - ionova-testnet
+    restart: unless-stopped
+
+networks:
+  ionova-testnet:
+    driver: bridge
+
+volumes:
+  validator-0-data:
+  validator-1-data:
+  sequencer-0-data:
+  prometheus-data:
+  grafana-data:

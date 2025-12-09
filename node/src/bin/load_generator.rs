@@ -2,13 +2,13 @@ use anyhow::Result;
 use clap::Parser;
 use futures::future::join_all;
 use rand::Rng;
+use rand::SeedableRng;
 use rust_decimal::Decimal;
 use rust_decimal_macros::dec;
 use std::sync::Arc;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
-use tokio::sync::Semaphore;
+use std::time::Duration;
 use tokio::time::Instant;
-use tracing::{info, warn};
+use tracing::info;
 
 /// Transaction structure for load testing
 #[derive(Debug, Clone)]
@@ -82,9 +82,8 @@ impl LoadGenerator {
             tasks.push(task);
         }
 
-        // Start metrics reporter
-        let metrics_task = self.spawn_metrics_reporter();
-        tasks.push(metrics_task);
+        // Start metrics reporter in background
+        let _ = self.spawn_metrics_reporter();
 
         // Wait for all tasks to complete
         join_all(tasks).await;
@@ -109,7 +108,7 @@ impl LoadGenerator {
 
         let mut handles = Vec::new();
 
-        for worker_id in 0..workers {
+        for _worker_id in 0..workers {
             let total_sent = self.total_sent.clone();
             let total_success = self.total_success.clone();
             let total_failed = self.total_failed.clone();
@@ -117,7 +116,7 @@ impl LoadGenerator {
             let start_time = self.start_time;
 
             let handle = tokio::spawn(async move {
-                let mut rng = rand::thread_rng();
+                let mut rng = rand::rngs::StdRng::from_entropy();
                 let end_time = start_time + Duration::from_secs(duration);
 
                 while Instant::now() < end_time {
@@ -172,7 +171,7 @@ impl LoadGenerator {
         Ok(())
     }
 
-    async fn spawn_metrics_reporter(&self) -> Result<()> {
+    fn spawn_metrics_reporter(&self) {
         let total_sent = self.total_sent.clone();
         let total_success = self.total_success.clone();
         let total_failed = self.total_failed.clone();
@@ -205,8 +204,6 @@ impl LoadGenerator {
                 );
             }
         });
-
-        Ok(())
     }
 
     async fn print_final_report(&self) {

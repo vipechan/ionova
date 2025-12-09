@@ -1,66 +1,4 @@
-# Ionova Blockchain
 
-**The Future of High-Performance Blockchain**
-
-500,000 TPS • 1-Second Finality • Quantum-Resistant • Full EVM Compatibility
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)](https://www.rust-lang.org)
-[![Solidity](https://img.shields.io/badge/Solidity-0.8+-blue.svg)](https://soliditylang.org)
-[![Contracts CI](https://github.com/vipechan/ionova/actions/workflows/contracts-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/contracts-ci.yml)
-[![Node CI](https://github.com/vipechan/ionova/actions/workflows/node-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/node-ci.yml)
-[![Frontend CI](https://github.com/vipechan/ionova/actions/workflows/frontend-ci.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/frontend-ci.yml)
-[![Security Audit](https://github.com/vipechan/ionova/actions/workflows/security-audit.yml/badge.svg)](https://github.com/vipechan/ionova/actions/workflows/security-audit.yml)
-
-
----
-
-## What is Ionova?
-
-Ionova is a **sharded Layer 1 blockchain** that combines Solana-level speed with Ethereum compatibility:
-
-- 🚀 **500,000 TPS** - 33× faster than Ethereum, 8× faster than Solana
-- ⚡ **1-Second Finality** - Instant transaction confirmation
-- 🔐 **Quantum-Resistant** - Post-quantum BFT consensus
-- 🔧 **EVM Compatible** - Deploy any Solidity contract
-- 💰 **Low Fees** - $0.005 per transaction
-- 🌐 **Complete DeFi** - DEX, lending, staking, NFTs, DAO ready at launch
-
----
-
-## Quick Start
-
-### Run Devnet (Docker)
-
-```bash
-cd devnet
-docker compose up -d
-
-# Access:
-# - RPC: http://localhost:27000
-# - Grafana: http://localhost:3000
-# - Prometheus: http://localhost:9090
-```
-
-### Deploy Smart Contract
-
-```bash
-cd contracts
-npm install
-npx hardhat run scripts/deploy.js --network ionova
-```
-
-### Build Rust Node
-
-```bash
-cd node
-cargo build --release
-./target/release/ionova_node --help
-```
-
----
-
-## Architecture
 
 ### Sharded Design
 
@@ -87,9 +25,10 @@ cargo build --release
 - **Node:** Rust (tokio, revm, RocksDB)
 - **Consensus:** PQ-BFT (quantum-resistant)
 - **Smart Contracts:** Solidity (EVM) + WASM
-- **Storage:** RocksDB
-- **Networking:** libp2p
+- **Cryptography:** ECDSA + Dilithium + SPHINCS+ + Falcon
+- **SDK:** TypeScript with React hooks
 - **Monitoring:** Prometheus + Grafana
+- **Explorer:** React + TanStack Query + Recharts
 
 ---
 
@@ -163,21 +102,21 @@ await sdk.staking.stake(ethers.parseEther("100"));
 ## Documentation
 
 ### For Developers
-- 📘 [Developer Guide](requirements/DEVELOPER_GUIDE.md) - Build smart contracts
+- 📘 [Developer Guide](docs/guides/DEVELOPER_GUIDE.md) - Build smart contracts
 - 📗 [Solidity Guide](requirements/SOLIDITY_GUIDE.md) - Solidity on Ionova
-- 📙 [Architecture](requirements/ARCHITECTURE.md) - System design
+- 📙 [Architecture](docs/architecture/ARCHITECTURE_FINALIZED.md) - System design
 - 📕 [Tech Stack](requirements/TECH_STACK.md) - Technologies used
 
 ### For Node Operators
 - 🖥️ [Hardware Requirements](requirements/HARDWARE_REQUIREMENTS.md) - Server specs
 - 💰 [Cheap Hosting](requirements/CHEAP_HOSTING.md) - Budget options
-- 🚀 [Deployment Guide](DEPLOYMENT.md) - Deploy step-by-step
+- 🚀 [Deployment Guide](docs/getting-started/DEPLOYMENT.md) - Deploy step-by-step
 - 📊 [Node Types](requirements/NODE_TYPES.md) - Validator, sequencer, full node
 
 ### For Investors
-- 💎 [Tokenomics](requirements/TOKENOMICS.md) - Supply, rewards, staking
+- 💎 [Tokenomics](docs/tokenomics/IONX_TOKENOMICS.md) - Supply, rewards, staking
 - 📈 [Potential Analysis](requirements/POTENTIAL.md) - Market opportunity
-- 🎫 [Validator Sale](requirements/VALIDATOR_SALE.md) - Fractional ownership
+- 🎫 [Validator Sale](docs/tokenomics/VALIDATOR_SALE_README.md) - Fractional ownership
 - 🎁 [Airdrop](requirements/AIRDROP.md) - 100 IONX per user
 
 ### Economics
@@ -199,13 +138,46 @@ await sdk.staking.stake(ethers.parseEther("100"));
 
 ### Comparison
 
-| Blockchain | TPS | Finality | EVM | Quantum-Safe |
-|------------|-----|----------|-----|---------------|
-| Ethereum | 15 | 12+ min | ✅ | ❌ |
-| Solana | 65,000 | 0.4s | ❌ | ❌ |
-| Avalanche | 4,500 | 1s | ✅ | ❌ |
-| Polygon | 7,000 | 2s | ✅ | ❌ |
-| **Ionova** | **500,000** | **1s** | **✅** | **✅** |
+| Blockchain | TPS | Finality | EVM | Quantum-Safe | Reorg Risk |
+|------------|-----|----------|-----|--------------|------------|
+| Ethereum | 15 | 12-15 min | ✅ | ❌ | Low |
+| Solana | 65,000 | 0.4s | ❌ | ❌ | Medium |
+| Avalanche | 4,500 | 1-2s | ✅ | ❌ | Low |
+| Polygon | 7,000 | 2s | ✅ | ❌ | Low |
+| **Ionova** | **500,000** | **1s** | **✅** | **✅** | **NONE** |
+
+---
+
+## 🔐 Quantum-Safe Features
+
+### Supported Signature Algorithms
+
+| Algorithm | Type | Size | Speed | Quantum-Safe | Gas Cost |
+|-----------|------|------|-------|--------------|----------|
+| ECDSA | Traditional | 65B | <1ms | ❌ | 24,000 |
+| **Dilithium** | PQ Lattice | 2.4KB | 2ms | ✅ | 46,000* |
+| **SPHINCS+** | PQ Hash | 2KB | 10ms | ✅ | 56,000* |
+| **Falcon** | PQ NTRU | 1.3KB | 1ms | ✅ | 39,000* |
+| **Hybrid** | ECDSA+PQ | 2.5KB | 3ms | ✅ | 28,000* |
+
+*With 50% gas subsidy (2025-2030 migration period)
+
+### Wallet SDK
+
+```typescript
+import { IonovaWallet } from '@ionova/wallet-sdk';
+
+// Create quantum-safe wallet
+const wallet = IonovaWallet.createDilithium();
+
+// Sign transaction with quantum-resistant signature
+const tx = await wallet.signTransaction({
+  to: '0x...',
+  value: '100' // IONX
+});
+
+// Gas cost: 46,000 (subsidized from 71,000)
+```
 
 ---
 
@@ -213,28 +185,58 @@ await sdk.staking.stake(ethers.parseEther("100"));
 
 ```
 ionova/
-├── node/                  # Rust blockchain node
+├── node/                    # Rust blockchain node
 │   ├── src/
-│   │   ├── genesis.rs     # Native IONX allocation
-│   │   ├── sequencer.rs   # Transaction ordering
-│   │   ├── fee_model.rs   # EIP-1559 fees
-│   │   ├── mempool.rs     # Rate limiting
+│   │   ├── crypto.rs       # 🔐 PQ signature support (NEW)
+│   │   ├── transaction.rs   # 💰 Gas-optimized txs (NEW)
+│   │   ├── genesis.rs      # Native IONX allocation
+│   │   ├── sequencer.rs    # Transaction ordering
+│   │   ├── fee_model.rs    # EIP-1559 fees
+│   │   ├── mempool.rs      # Rate limiting
 │   │   ├── evm_executor.rs # Solidity execution
-│   │   └── staking.rs     # Block rewards
+│   │   ├── staking.rs      # Block rewards
+│   │   └── rpc.rs          # 🔐 PQ signature RPC (NEW)
+│   ├── tests/              # 🧪 Integration tests (NEW)
+│   ├── examples/           # 📚 Usage examples (NEW)
 │   └── Cargo.toml
-├── contracts/             # Solidity smart contracts
-│   ├── dex/              # IonovaSwap DEX
-│   ├── lending/          # IonovaLend protocol
-│   ├── staking/          # stIONX liquid staking
-│   ├── nft/              # NFT marketplace
-│   └── governance/       # DAO
-├── devnet/               # Docker devnet
+│
+├── sdk/wallet-sdk/         # 🔐 Quantum-safe SDK (NEW)
+│   ├── src/
+│   │   ├── index.ts        # Core wallet SDK
+│   │   ├── react.tsx       # React hooks
+│   │   └── components/     # UI components
+│   └── package.json
+│
+├── explorer/                # 📊 Block explorer (NEW)
+│   ├── src/
+│   │   ├── App.tsx
+│   │   └── pages/
+│   │       └── Dashboard.tsx  # Quantum analytics
+│   └── server/             # Explorer API
+│
+├── contracts/              # Solidity smart contracts
+│   ├── dex/               # IonovaSwap DEX
+│   ├── lending/           # IonovaLend protocol
+│   ├── staking/           # stIONX liquid staking
+│   ├── nft/               # NFT marketplace
+│   └── governance/        # DAO
+│
+├── devnet/                # Docker devnet (8 shards)
 │   ├── docker-compose.yml
 │   ├── genesis.json
 │   └── shard_config.json
-├── sdk/                  # JavaScript SDK
-├── requirements/         # Documentation
-└── next_steps/website/   # Marketing website
+│
+├── testnet/               # 🚀 Testnet deployment (NEW)
+│   ├── docker-compose.yml # 16 shards, explorer, faucet
+│   └── genesis.json
+│
+├── docs/                  # 📚 Documentation (NEW)
+│   ├── DEVELOPER_TUTORIAL.md
+│   ├── QUANTUM_MIGRATION_STRATEGY.md
+│   ├── CONSENSUS_MODEL.md
+│   └── PRODUCTION_README.md
+│
+└── requirements/          # Technical documentation
 ```
 
 ---
@@ -243,7 +245,7 @@ ionova/
 
 ### For Developers
 
-- 💻 **Build dApps:** [Developer Guide](requirements/DEVELOPER_GUIDE.md)
+- 💻 **Build dApps:** [Developer Guide](docs/guides/DEVELOPER_GUIDE.md)
 - 💰 **Get Funded:** Developer grants up to $100k
 - 🐛 **Bug Bounties:** Up to $50k per critical bug
 

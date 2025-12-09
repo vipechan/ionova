@@ -1,0 +1,537 @@
+/* Commission Admin Panel Styles */
+
+.commission-admin-panel {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #fff;
+    padding: 40px;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.admin-header h1 {
+    font-size: 36px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 12px 0;
+}
+
+.admin-header p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Levels Control */
+.levels-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.levels-control h2 {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+}
+
+.levels-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 24px;
+}
+
+.level-btn {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.level-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+}
+
+.level-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.levels-display {
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #667eea;
+    border-radius: 20px;
+    padding: 30px 60px;
+}
+
+.levels-count {
+    font-size: 72px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.levels-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 8px;
+}
+
+.levels-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.info-item {
+    display: flex;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.info-value {
+    font-weight: 700;
+}
+
+/* Rates Configuration */
+.rates-configuration {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.action-btn.reset {
+    background: linear-gradient(45deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.action-btn.save {
+    background: linear-gradient(45deg, #4ade80 0%, #22c55e 100%);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Rates Table */
+.rates-table-container {
+    overflow-x: auto;
+}
+
+.rates-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.rates-table th {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.rank-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.rank-icon {
+    font-size: 32px;
+}
+
+.rank-name {
+    font-size: 14px;
+}
+
+.rank-total {
+    font-size: 11px;
+    color: #4ade80;
+    background: rgba(74, 222, 128, 0.2);
+    padding: 4px 12px;
+    border-radius: 12px;
+}
+
+.rates-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rates-table tr.new-level {
+    background: rgba(102, 126, 234, 0.1);
+    border-left: 3px solid #667eea;
+}
+
+.level-cell {
+    text-align: center;
+}
+
+.level-badge {
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.level-badge.level-1,
+.level-badge.level-2,
+.level-badge.level-3,
+.level-badge.level-4 {
+    background: rgba(102, 126, 234, 0.3);
+}
+
+.level-badge.level-5,
+.level-badge.level-6,
+.level-badge.level-7 {
+    background: rgba(245, 158, 11, 0.3);
+}
+
+.level-badge.level-8,
+.level-badge.level-9,
+.level-badge.level-10 {
+    background: rgba(239, 68, 68, 0.3);
+}
+
+.rate-cell {
+    text-align: center;
+}
+
+.rate-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.rate-input {
+    width: 80px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.rate-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.rate-unit {
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.rate-basis-points {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: monospace;
+}
+
+/* Preview Section */
+.preview-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.preview-section h2 {
+    margin: 0 0 24px 0;
+    font-size: 24px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.preview-card {
+    border-radius: 16px;
+    padding: 20px;
+    border: 2px solid transparent;
+}
+
+.preview-card.rank-starter {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.1) 0%, rgba(203, 213, 225, 0.1) 100%);
+    border-color: #94a3b8;
+}
+
+.preview-card.rank-bronze {
+    background: linear-gradient(135deg, rgba(205, 127, 50, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border-color: #cd7f32;
+}
+
+.preview-card.rank-silver {
+    background: linear-gradient(135deg, rgba(192, 192, 192, 0.1) 0%, rgba(224, 224, 224, 0.1) 100%);
+    border-color: #c0c0c0;
+}
+
+.preview-card.rank-gold {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 237, 78, 0.1) 100%);
+    border-color: #ffd700;
+}
+
+.preview-rank-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.preview-rank-icon {
+    font-size: 28px;
+}
+
+.preview-rank-name {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.preview-distributions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.preview-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+.preview-level-label {
+    font-weight: 700;
+}
+
+.preview-amount {
+    color: #4ade80;
+    font-weight: 700;
+}
+
+.preview-percent {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+}
+
+.preview-separator {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 16px 0;
+}
+
+.preview-totals {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.preview-total,
+.preview-treasury {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.preview-total-amount {
+    color: #4ade80;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.preview-treasury-amount {
+    color: #fbbf24;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Validation Rules */
+.validation-rules {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.rule-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.rule-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.rule-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.rule-description {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+}
+
+/* Action Log */
+.action-log {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.log-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 150px 1fr auto;
+    gap: 16px;
+    align-items: center;
+}
+
+.log-time {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: monospace;
+}
+
+.log-action {
+    font-size: 14px;
+}
+
+.log-admin {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: monospace;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .commission-admin-panel {
+        padding: 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .preview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .log-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .levels-selector {
+        gap: 20px;
+    }
+
+    .levels-display {
+        padding: 20px 40px;
+    }
+
+    .levels-count {
+        font-size: 56px;
+    }
+
+    .rates-table {
+        font-size: 12px;
+    }
+
+    .rate-input {
+        width: 60px;
+    }
+}

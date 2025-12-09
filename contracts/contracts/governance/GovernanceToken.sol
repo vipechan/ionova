@@ -4,7 +4,6 @@ pragma solidity ^0.8.19;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
@@ -12,7 +11,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev ERC20 token with voting capabilities for Ionova DAO
  * @notice IONX token holders can participate in governance
  */
-contract GovernanceToken is ERC20, ERC20Burnable, ERC20Votes, ERC20Permit, Ownable {
+contract GovernanceToken is ERC20, ERC20Burnable, ERC20Votes, Ownable {
     // Maximum supply: 10 billion IONX
     uint256 public constant MAX_SUPPLY = 10_000_000_000 * 10**18;
 

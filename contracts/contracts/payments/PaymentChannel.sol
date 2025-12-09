@@ -75,7 +75,7 @@ contract PaymentChannel is Ownable, ReentrancyGuard, Pausable {
     
     // ============ Constructor ============
     
-    constructor() Ownable(msg.sender) {}
+    constructor() {}
     
     // ============ Channel Functions ============
     

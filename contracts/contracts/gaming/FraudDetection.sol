@@ -353,7 +353,10 @@ contract FraudDetection is AccessControl, Pausable, ReentrancyGuard {
         require(frozenAccountDetails[account].disputed, "No dispute filed");
         
         if (inFavorOfUser) {
-            unfreezeAccount(account, resolution);
+            frozenAccounts[account] = false;
+            frozenAccountDetails[account].resolved = true;
+            riskScores[account] = 0;
+            emit AccountUnfrozen(account, resolution);
         }
         
         frozenAccountDetails[account].resolved = true;

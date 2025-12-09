@@ -1,0 +1,585 @@
+/* Downline Manager Styles */
+
+.downline-manager {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    color: #fff;
+    padding: 40px;
+}
+
+.downline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.downline-header h1 {
+    margin: 0;
+    font-size: 32px;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.view-toggle {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.view-toggle.active {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    border-color: transparent;
+}
+
+.export-btn {
+    background: linear-gradient(45deg, #4ade80 0%, #22c55e 100%);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Summary Stats */
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+}
+
+.summary-icon {
+    font-size: 48px;
+}
+
+.summary-info {
+    flex: 1;
+}
+
+.summary-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.summary-value {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+}
+
+.summary-breakdown {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Filters */
+.filters-section {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+.filter-group input,
+.filter-group select {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    min-width: 150px;
+}
+
+/* Tree View */
+.tree-view {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.tree-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tree-node {
+    margin-left: 0;
+}
+
+.node-content {
+    display: flex;
+    gap: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s;
+}
+
+.node-content:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.node-content.level-1 {
+    border-left-color: #667eea;
+}
+
+.node-content.level-2 {
+    border-left-color: #764ba2;
+}
+
+.node-content.level-3 {
+    border-left-color: #f59e0b;
+}
+
+.node-content.level-4 {
+    border-left-color: #ef4444;
+}
+
+.expand-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.expand-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.node-info {
+    flex: 1;
+}
+
+.node-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.node-address {
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.node-name {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.node-level {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.node-status {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.node-status.status-active {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.node-status.status-inactive {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+}
+
+.node-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.node-stat {
+    display: flex;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.stat-value {
+    font-weight: 600;
+}
+
+.stat-value.commission {
+    color: #4ade80;
+}
+
+.commission-breakdown {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.commission-item {
+    background: rgba(74, 222, 128, 0.1);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.node-children {
+    margin-left: 44px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* List View */
+.list-view {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.downline-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.downline-table th {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.downline-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.downline-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.level-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.level-badge.level-1 {
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+}
+
+.level-badge.level-2 {
+    background: linear-gradient(45deg, #764ba2 0%, #f59e0b 100%);
+}
+
+.level-badge.level-3 {
+    background: linear-gradient(45deg, #f59e0b 0%, #ef4444 100%);
+}
+
+.level-badge.level-4 {
+    background: linear-gradient(45deg, #ef4444 0%, #dc2626 100%);
+}
+
+.address-cell {
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.amount-cell {
+    font-weight: 600;
+    text-align: right;
+}
+
+.commission-cell {
+    font-weight: 700;
+    color: #4ade80;
+    text-align: right;
+}
+
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-badge.active {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.status-badge.inactive {
+    background: rgba(107, 114, 128, 0.2);
+    color: #9ca3af;
+}
+
+.status-badge.paid {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+}
+
+.status-badge.pending {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+.date-cell {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Commission History */
+.commission-history {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.commission-history h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.history-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.commission-amount {
+    font-weight: 700;
+    color: #4ade80;
+    font-size: 16px;
+}
+
+/* Commission Rates */
+.commission-rates {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.commission-rates h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+.rates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.rate-card {
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.rate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.level-1-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+    border-color: #667eea;
+}
+
+.level-2-card {
+    background: linear-gradient(135deg, rgba(118, 75, 162, 0.2) 0%, rgba(245, 158, 11, 0.2) 100%);
+    border-color: #764ba2;
+}
+
+.level-3-card {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(239, 68, 68, 0.2) 100%);
+    border-color: #f59e0b;
+}
+
+.level-4-card {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.2) 100%);
+    border-color: #ef4444;
+}
+
+.rate-level {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.rate-percentage {
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.rate-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 12px;
+}
+
+.rate-example {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .downline-manager {
+        padding: 20px;
+    }
+
+    .downline-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .node-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .node-children {
+        margin-left: 20px;
+    }
+
+    .tree-view,
+    .list-view,
+    .commission-history,
+    .commission-rates {
+        padding: 16px;
+        overflow-x: auto;
+    }
+
+    .rates-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 /// IONX Token Emission System
 /// Total Supply: 10,000,000,000 IONX (10 billion)
-/// Emission Period: 20 years with 2-year halving
+/// Emission Period: 15 years with annual halving
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct EmissionSchedule {
     /// Total maximum supply (10 billion IONX)
@@ -13,13 +13,13 @@ pub struct EmissionSchedule {
     /// Genesis allocation (pre-mined)
     pub genesis_allocation: Decimal,
     
-    /// Initial block reward (79.35 IONX)
-    pub initial_block_reward: Decimal,
+    /// Initial daily emission (9,600,000 IONX)
+    pub initial_daily_emission: Decimal,
     
-    /// Halving interval in blocks (2 years = 63,072,000 blocks)
-    pub halving_interval: u64,
+    /// Halving interval in days (1 year = 365 days)
+    pub halving_interval_days: u64,
     
-    /// Number of halvings (10 total over 20 years)
+    /// Number of halvings (15 total over 15 years)
     pub total_halvings: u32,
     
     /// Current circulating supply
@@ -39,10 +39,10 @@ impl Default for EmissionSchedule {
     fn default() -> Self {
         Self {
             max_supply: dec!(10_000_000_000),           // 10 billion
-            genesis_allocation: dec!(2_100_000),        // 2.1M pre-mined
-            initial_block_reward: dec!(79.35),          // Recalculated for 20 years
-            halving_interval: 63_072_000,               // 2 years
-            total_halvings: 10,                         // 20 years / 2
+            genesis_allocation: dec!(2_100_000),        // 2.1M for fractions
+            initial_daily_emission: dec!(9_600_000),    // 9.6M IONX per day
+            halving_interval_days: 365,                 // 1 year
+            total_halvings: 15,                         // 15 years
             circulating_supply: dec!(2_100_000),        // Starts with genesis
             total_minted: Decimal::ZERO,
             total_burned: Decimal::ZERO,
