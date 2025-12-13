@@ -33,11 +33,11 @@ contract IONXToken is
     /// @notice Maximum total supply (10 billion IONX)
     uint256 public constant MAX_SUPPLY = 10_000_000_000 * 10**18;
     
-    /// @notice Initial daily emission (1 million IONX/day)
-    uint256 public constant INITIAL_DAILY_EMISSION = 1_000_000 * 10**18;
+    /// @notice Initial daily emission (10.82M IONX/day - 79% of supply over 15 years)
+    uint256 public constant INITIAL_DAILY_EMISSION = 10_821_918 * 10**18;
     
-    /// @notice Halving interval (730 days = 2 years)
-    uint256 public constant HALVING_INTERVAL = 730 days;
+    /// @notice Halving interval (365 days = 1 year, annual halving)
+    uint256 public constant HALVING_INTERVAL = 365 days;
     
     /// @notice Basis points denominator (10000 = 100%)
     uint256 public constant BP_DENOMINATOR = 10000;

@@ -4,6 +4,8 @@ import PurchaseForm from '../components/PurchaseForm';
 import HoldingsView from '../components/HoldingsView';
 import AffiliatePanel from '../components/AffiliatePanel';
 import PurchaseHistory from '../components/PurchaseHistory';
+import CountdownTimer from '../components/CountdownTimer';
+import { getSaleStartDate } from '../config/saleConfig';
 
 export default function ValidatorSale() {
     const [activeTab, setActiveTab] = useState('buy');
@@ -16,6 +18,9 @@ export default function ValidatorSale() {
                     Own a piece of Ionova's validators. Earn passive income from network fees.
                 </p>
             </div>
+
+            {/* Countdown Timer */}
+            <CountdownTimer targetDate={getSaleStartDate()} />
 
             {/* Tab Navigation */}
             <div className="tab-navigation">

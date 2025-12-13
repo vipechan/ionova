@@ -40,11 +40,13 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
     uint256 public constant END_PRICE = 1000 * 10**6; // $1000
     uint256 public constant PRICE_RANGE = END_PRICE - START_PRICE; // $990
     
-    // IONX Emission Schedule
-    uint256 public constant INITIAL_DAILY_EMISSION = 1_000_000 * 10**18; // 1M IONX/day
-    uint256 public constant HALVING_INTERVAL = 730 days; // 2 years
-    uint256 public constant SECONDS_PER_DAY = 86400;
-    uint256 public immutable GENESIS_TIMESTAMP; // Set at deployment
+    // IONX Emission Schedule - 79% of supply distributed over 15 years
+    // Block-based emission (1-second block time = 86,400 blocks/day)
+    uint256 public constant INITIAL_BLOCK_EMISSION = 125_254_837_962_962_962; // ~125.25 IONX/block (in wei)
+    uint256 public constant BLOCKS_PER_DAY = 86400; // 1-second blocks
+    uint256 public constant BLOCKS_PER_YEAR = 31_536_000; // 365 days * 86,400 blocks
+    uint256 public constant HALVING_BLOCKS = 31_536_000; // Halve every year
+    uint256 public immutable GENESIS_BLOCK; // Block number at deployment
 
     // State
     uint256 public fractionsSold;
@@ -143,8 +145,8 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
         saleStartTime = _saleStartTime;
         saleEndTime = _saleEndTime;
         
-        // Set genesis timestamp for emission calculation
-        GENESIS_TIMESTAMP = block.timestamp;
+        // Set genesis block for emission calculation
+        GENESIS_BLOCK = block.number;
         
         // Initialize reserved fractions (each gets 100,000)
         totalFractionsOwned[_treasuryReserved] = FRACTIONS_PER_VALIDATOR;
@@ -298,9 +300,9 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
         fractionsSold += quantity;
         totalFractionsOwned[msg.sender] += quantity;
         
-        // Initialize lastClaimTime for new buyer if not set
+        // Initialize lastClaimTime for new buyer if not set (stores block number)
         if (lastClaimTime[msg.sender] == 0) {
-            lastClaimTime[msg.sender] = block.timestamp;
+            lastClaimTime[msg.sender] = block.number;
         }
     }
 
@@ -414,25 +416,36 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
     // ==================== IONX REWARD SYSTEM ====================
     
     /**
-     * @dev Get current daily IONX emission based on halving schedule
+     * @dev Get current per-block IONX emission based on halving schedule
      */
-    function getCurrentDailyEmission() public view returns (uint256) {
-        uint256 timeSinceGenesis = block.timestamp - GENESIS_TIMESTAMP;
-        uint256 halvingsPassed = timeSinceGenesis / HALVING_INTERVAL;
+    function getCurrentBlockEmission() public view returns (uint256) {
+        uint256 blocksSinceGenesis = block.number - GENESIS_BLOCK;
+        uint256 halvingsPassed = blocksSinceGenesis / HALVING_BLOCKS;
         
-        // Max 15 halvings (30 years)
+        // Max 15 halvings (15 years with 1-year intervals)
         if (halvingsPassed >= 15) {
-            return INITIAL_DAILY_EMISSION / (2 ** 15);
+            return INITIAL_BLOCK_EMISSION / (2 ** 15);
         }
         
-        return INITIAL_DAILY_EMISSION / (2 ** halvingsPassed);
+        return INITIAL_BLOCK_EMISSION / (2 ** halvingsPassed);
     }
     
     /**
-     * @dev Get emission per second
+     * @dev Get current daily IONX emission (for UI/compatibility)
      */
-    function getEmissionPerSecond() public view returns (uint256) {
-        return getCurrentDailyEmission() / SECONDS_PER_DAY;
+    function getCurrentDailyEmission() public view returns (uint256) {
+        return getCurrentBlockEmission() * BLOCKS_PER_DAY;
+    }
+    
+    /**
+     * @dev Get emission per block for a specific fraction count
+     */
+    function getEmissionPerBlock(uint256 fractions) public view returns (uint256) {
+        uint256 activePool = getTotalActiveFractions();
+        if (activePool == 0) return 0;
+        
+        uint256 blockEmission = getCurrentBlockEmission();
+        return (blockEmission * fractions) / activePool;
     }
     
     /**
@@ -455,21 +468,22 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
     }
     
     /**
-     * @dev Calculate pending rewards for a user
+     * @dev Calculate pending rewards for a user (block-based)
      */
     function calculatePendingRewards(address user) public view returns (uint256) {
         uint256 userFractions = totalFractionsOwned[user];
         if (userFractions == 0) return 0;
         
-        uint256 timeSinceLastClaim = block.timestamp - lastClaimTime[user];
-        if (timeSinceLastClaim == 0) return pendingRewards[user];
+        // Use block number for more accurate calculation
+        uint256 lastClaimBlock = lastClaimTime[user]; // Reusing storage (stores block number now)
+        if (lastClaimBlock == 0) lastClaimBlock = GENESIS_BLOCK;
         
-        uint256 rewardPerSecond = getEmissionPerSecond();
-        uint256 activePool = getTotalActiveFractions();
+        uint256 blocksSinceLastClaim = block.number - lastClaimBlock;
+        if (blocksSinceLastClaim == 0) return pendingRewards[user];
         
-        // User's share of emission per second
-        uint256 userRewardPerSecond = (rewardPerSecond * userFractions) / activePool;
-        uint256 accruedRewards = userRewardPerSecond * timeSinceLastClaim;
+        // Calculate rewards based on blocks elapsed
+        uint256 userRewardPerBlock = getEmissionPerBlock(userFractions);
+        uint256 accruedRewards = userRewardPerBlock * blocksSinceLastClaim;
         
         return pendingRewards[user] + accruedRewards;
     }
@@ -481,9 +495,9 @@ contract ValidatorFractionNFT is ERC1155, Ownable, ReentrancyGuard, Pausable {
         uint256 rewards = calculatePendingRewards(msg.sender);
         require(rewards > 0, "No rewards to claim");
         
-        // Update state
+        // Update state (lastClaimTime now stores block number)
         pendingRewards[msg.sender] = 0;
-        lastClaimTime[msg.sender] = block.timestamp;
+        lastClaimTime[msg.sender] = block.number;
         totalRewardsDistributed += rewards;
         
         // Transfer IONX

@@ -161,8 +161,10 @@ The frontend provides three main views:
 - **Starting Price**: $10 per fraction
 - **Ending Price**: $100 per fraction
 - **Total Potential Raise**: ~$100,000,000
-- **Daily Rewards**: 970 IONX per fraction
-- **Estimated APR**: 1,940% - 9,700% (price dependent)
+- **Lifetime Rewards (15 years)**: 3,750 IONX per fraction
+- **Year 1 Rewards**: 1,875 IONX per fraction (50% of total)
+- **Daily Rewards (Year 1)**: 5.14 IONX per fraction
+- **Estimated Year 1 ROI**: 1,875% - 18,750% (price dependent)
 
 ## 🧪 Testing
 

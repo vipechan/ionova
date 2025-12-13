@@ -82,6 +82,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sale" element={<ValidatorSale />} />
+          <Route path="/validator-sale" element={<ValidatorSale />} />
           <Route path="/faucet" element={<FaucetPage />} />
           <Route path="/university" element={<University />} />
           <Route path="/explorer" element={<Explorer />} />

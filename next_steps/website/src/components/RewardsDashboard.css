@@ -1,0 +1,363 @@
+.rewards-dashboard {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color, #e0e0e0);
+}
+
+.dashboard-header h2 {
+    margin: 0;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.next-distribution {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.next-distribution .label {
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.next-distribution .time {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.next-distribution .ready {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #10b981;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Balance Grid */
+.balance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.balance-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.balance-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--card-accent, #667eea), var(--card-accent-end, #764ba2));
+}
+
+.balance-card.claimable {
+    --card-accent: #10b981;
+    --card-accent-end: #059669;
+}
+
+.balance-card.auto-staked {
+    --card-accent: #3b82f6;
+    --card-accent-end: #2563eb;
+}
+
+.balance-card.total-earned {
+    --card-accent: #8b5cf6;
+    --card-accent-end: #7c3aed;
+}
+
+.balance-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 0.5rem;
+}
+
+.pending {
+    font-size: 0.875rem;
+    color: #667eea;
+    margin-bottom: 1rem;
+}
+
+.sub-stats {
+    font-size: 0.875rem;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+/* Claim Button */
+.claim-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.claim-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.claim-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Reward Breakdown */
+.reward-breakdown {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.reward-breakdown h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+}
+
+.breakdown-visual {
+    margin-bottom: 1rem;
+}
+
+.breakdown-bar {
+    display: flex;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bar-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.bar-section:hover {
+    filter: brightness(1.1);
+}
+
+.bar-section.auto-stake {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+.bar-section.claimable {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.bar-section .value {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+/* Stats Row */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a202c;
+}
+
+/* Info Text */
+.info-text {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+/* Success Banner */
+.success-banner {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Connect Prompt */
+.connect-prompt {
+    background: white;
+    border-radius: 16px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+.connect-prompt h3 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+}
+
+.connect-prompt p {
+    color: #666;
+    margin: 0;
+}
+
+/* Animations */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .rewards-dashboard {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .next-distribution {
+        align-items: flex-start;
+    }
+
+    .balance-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .amount {
+        font-size: 1.75rem;
+    }
+
+    .breakdown-bar {
+        height: 80px;
+    }
+
+    .bar-section {
+        font-size: 0.875rem;
+    }
+
+    .stats-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+
+    .balance-card,
+    .reward-breakdown,
+    .stat-item,
+    .connect-prompt {
+        background: #1a202c;
+        color: #e2e8f0;
+    }
+
+    .card-content h3,
+    .stat-label,
+    .info-text,
+    .connect-prompt p {
+        color: #a0aec0;
+    }
+
+    .amount,
+    .stat-value {
+        color: #e2e8f0;
+    }
+
+    .balance-card {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+}

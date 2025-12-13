@@ -47,8 +47,9 @@ contract ValidatorFractionNFTUpgradeable is
     uint256 public constant END_PRICE = 100 * 10**6;
     uint256 public constant PRICE_RANGE = END_PRICE - START_PRICE;
     
-    uint256 public constant INITIAL_DAILY_EMISSION = 1_000_000 * 10**18;
-    uint256 public constant HALVING_INTERVAL = 730 days;
+    // IONX Emission Schedule - 79% of supply distributed over 15 years
+    uint256 public constant INITIAL_DAILY_EMISSION = 10_821_918 * 10**18; // ~10.82M IONX/day
+    uint256 public constant HALVING_INTERVAL = 365 days; // 1 year (annual halving)
     uint256 public constant SECONDS_PER_DAY = 86400;
     
     // Slot 1-10: Core contract state

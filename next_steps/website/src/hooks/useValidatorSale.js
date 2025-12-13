@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount } from 'wagmi';
+import { useReadContract, useWriteContract, useWaitForTransactionReceipt, useAccount, usePublicClient } from 'wagmi';
 import { parseUnits, formatUnits } from 'viem';
 import validatorFractionNFTAbi from '../contracts/ValidatorFractionNFT.json';
 
@@ -8,6 +8,7 @@ const USDC_ADDRESS = import.meta.env.VITE_USDC_ADDRESS;
 
 export function useValidatorSale() {
     const { address } = useAccount();
+    const publicClient = usePublicClient();
     const [stats, setStats] = useState(null);
 
     // Read: Current Price
@@ -136,16 +137,46 @@ export function useValidatorSale() {
         }
     }, [saleStats]);
 
-    // Calculate ROI for given quantity
+    // Get total cost for a quantity (imperative call)
+    const getTotalCost = async (quantity) => {
+        if (!publicClient || !CONTRACT_ADDRESS) return 0n;
+        try {
+            const cost = await publicClient.readContract({
+                address: CONTRACT_ADDRESS,
+                abi: validatorFractionNFTAbi,
+                functionName: 'getTotalCost',
+                args: [BigInt(quantity)],
+            });
+            return cost;
+        } catch (error) {
+            console.error('Error getting total cost:', error);
+            return 0n;
+        }
+    };
+
+    // Calculate rewards and ROI for given quantity
+    // Per fraction over 15 years: 3750 IONX total
+    // 
+    // Emission follows annual halving:
+    // Year 1: 50% of total = 1875 IONX
+    // Year 2: 25% of total = 937.5 IONX
+    // Year 3: 12.5% of total = 468.75 IONX
+    // ... continues with halving until Year 15
     const calculateROI = (quantity, cost) => {
-        const annualRewardPerFraction = 970 * 365; // 970 IONX/day * 365 days
-        const totalAnnualRewards = quantity * annualRewardPerFraction;
+        // Total vested rewards per fraction over entire 15-year period
+        const totalLifetimeRewardsPerFraction = 3750; // IONX per fraction (entire 15 years)
+
+        // Year 1 is highest due to emission curve (50% of total released in Year 1)
+        const year1RewardsPerFraction = totalLifetimeRewardsPerFraction * 0.5; // 376.2 IONX
+
+        // Total Year 1 rewards for quantity
+        const totalYear1Rewards = quantity * year1RewardsPerFraction;
         const costUSD = parseFloat(formatUnits(cost || 0n, 6));
 
         if (costUSD === 0) return 0;
 
-        // Assuming IONX = $1 for calculation
-        const roi = ((totalAnnualRewards - costUSD) / costUSD) * 100;
+        // Calculate Year 1 ROI (assuming $1/IONX)
+        const roi = ((totalYear1Rewards - costUSD) / costUSD) * 100;
         return roi;
     };
 
@@ -183,7 +214,7 @@ export function useValidatorSale() {
         claimError,
 
         // Helper functions
-        // getTotalCost, // Removed for now as it requires publicClient refactor, can be added back if needed
+        getTotalCost,
         calculateROI,
         refetchStats,
     };
